@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/private/', '/admin/', '/player/login/'],
+      disallow: ['/player/growid/', '/player/login/', '/player/validate/'],
     },
     sitemap: APP_URL + '/sitemap.xml',
   };

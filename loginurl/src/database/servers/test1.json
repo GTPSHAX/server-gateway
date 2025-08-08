@@ -1,0 +1,11 @@
+{
+  "merchant": "../merchant/test.json",
+  "servers": [
+    {
+      "name": "MY SERVER",
+      "host": "127.0.0.1",
+      "port": 17091,
+      "expired_at": 0
+    }
+  ]
+}

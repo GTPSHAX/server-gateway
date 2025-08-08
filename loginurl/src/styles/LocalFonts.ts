@@ -23,3 +23,14 @@ export const pixelic_war = localFont({
     display: 'swap',
 });
 
+export const century_gothic = localFont({
+    src: "../../public/fonts/centurygothic.ttf",
+    variable: '--century-gothic',
+    display: 'swap',
+});
+
+export const century_gothic_bold = localFont({
+    src: "../../public/fonts/centurygothic_bold.ttf",
+    variable: '--century-gothic-bold',
+    display: 'swap',
+});

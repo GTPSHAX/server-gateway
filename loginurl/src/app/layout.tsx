@@ -80,9 +80,6 @@ export const metadata: Metadata = {
     title: APP_NAME,
   },
   
-  themeColor: "#113F67",
-  colorScheme: "dark",
-  
   robots: {
     index: true,
     follow: true,
@@ -135,9 +132,10 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/pixel-font7.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
       </head>
       <body
-        className={`antialiased min-h-screen bg-background text-foreground ${pixel_font7.className}`}
+        className={`antialiased min-h-screen text-foreground ${pixel_font7.className}`}
       >
         {children}
+        <script src="https://kit.fontawesome.com/0271dc4eb6.js" crossOrigin="anonymous"></script>
       </body>
     </html>
   );

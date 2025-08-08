@@ -19,8 +19,13 @@
   }
 }
 
+.text-sh {
+  text-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
 body {
-  background: var(--background);
+  /* background: var(--background); */
   color: var(--foreground);
   font-family: "--pixel-font7", sans-serif;
 }
