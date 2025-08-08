@@ -25,7 +25,7 @@ const Card: React.FC<DialogProps> = ({
   };
 
   return (
-    <div className={`border-2 border-[#88B9CA] rounded-sm ${getCardClasses()} ${className}`}
+    <div className={`border-2 border-[#88B9CA] rounded-[2px] max-h-screen overflow-y-auto ${getCardClasses()} ${className}`}
       style={{
         boxShadow: "1px 1px 0 rgba(0,0,0,0.5), inset 1px 1px 0 rgba(0,0,0,0.5)"
       }}>

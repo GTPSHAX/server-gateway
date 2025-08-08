@@ -19,9 +19,28 @@
   }
 }
 
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  display: none;
+  padding: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2c86aad3;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2c86aad3 transparent;
+}
+
 .text-sh {
-  text-shadow:
-    1px 1px 0 rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
 }
 
 body {

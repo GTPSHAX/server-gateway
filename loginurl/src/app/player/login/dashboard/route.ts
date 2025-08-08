@@ -1,10 +1,19 @@
 import consola from "consola";
 import { existsSync } from "fs";
+import { generateUnixToken } from "@/utils/Utils";
+import { notFound } from "next/navigation";
+
+const APP_SECRET_KEY = process.env.APP_SECRET_KEY || "NoSecretKeyProvided";
+
+// Redirect 404 page
+export async function GET() {
+  return notFound();
+}
 
 export async function POST(req: Request) {
   const tData: Record<string, string> = {};
   let status = 403;
-  let merchant_name = "Growtopia";
+  let merchant_name = "GTPS";
 
   try {
     const body = await req.text();
@@ -45,12 +54,14 @@ export async function POST(req: Request) {
     status === 403 ? {
       status: 302,
       headers: {
-        'Location': `dashboard/denied?merchant_name=${merchant_name}`
+        'Location': `dashboard/denied?merchant_name=${merchant_name}`,
+        'Set-Cookie': `session=${generateUnixToken(APP_SECRET_KEY)}; Path=/player/; HttpOnly; Secure; SameSite=Lax`
       }
     } : {
       status: 302,
       headers: {
-        'Location': `dashboard/home?data=${encodeURIComponent(JSON.stringify(tData))}&merchant_name=${merchant_name}`
+        'Location': `dashboard/home?data=${encodeURIComponent(JSON.stringify(tData))}&merchant_name=${merchant_name}`,
+        'Set-Cookie': `session=${generateUnixToken(APP_SECRET_KEY)}; Path=/player/; HttpOnly; Secure; SameSite=Lax`
       }
     }
   );

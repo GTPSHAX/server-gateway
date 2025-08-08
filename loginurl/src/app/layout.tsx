@@ -126,16 +126,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        <link rel="preload" href="/fonts/pixel-font7.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/pixel-font7.ttf" as="font" type="font/ttf" crossOrigin="anonymous" /> */}
       </head>
       <body
         className={`antialiased min-h-screen text-foreground ${pixel_font7.className}`}
       >
         {children}
-        <script src="https://kit.fontawesome.com/0271dc4eb6.js" crossOrigin="anonymous"></script>
+        {/* <script src="https://kit.fontawesome.com/0271dc4eb6.js" crossOrigin="anonymous"></script> */}
       </body>
     </html>
   );
