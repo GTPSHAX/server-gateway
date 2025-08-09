@@ -2,6 +2,8 @@ import consola from "consola";
 import { existsSync } from "fs";
 import { generateUnixToken } from "@/utils/Utils";
 import { notFound } from "next/navigation";
+import path from "path";
+import fs from "fs";
 
 const APP_SECRET_KEY = process.env.APP_SECRET_KEY || "NoSecretKeyProvided";
 
@@ -30,15 +32,17 @@ export async function POST(req: Request) {
     if (tData["meta"] !== "") {
       const params = new URLSearchParams(tData["meta"]);
       const merchant = params.get("merchant");
+      merchant_name = merchant as string || '';
       const apiKey = params.get("key");
 
       if (merchant || apiKey) {
-        const file_path = `./src/database/merchant/${merchant}.json`;
+        const file_path = path.join(process.cwd(), "..", "database", "merchants", merchant + ".json");
+        consola.log(file_path);
         if (!existsSync(file_path)) {
           throw new Error(`Merchant file not found: ${file_path}`);
         }
         
-        const data = await import(file_path);
+        const data = JSON.parse(fs.readFileSync(file_path, "utf-8"));
         if (merchant !== data.name && apiKey !== data.api_key) {
           throw new Error(`Invalid merchant or API key: ${merchant}, ${apiKey}`);
         }
@@ -51,16 +55,16 @@ export async function POST(req: Request) {
   }
 
   return new Response(null,
-    status === 403 ? {
+    status != 200 ? {
       status: 302,
       headers: {
-        'Location': `dashboard/denied?merchant_name=${merchant_name}`,
+        'Location': `dashboard/denied?merchant_name=${encodeURIComponent(merchant_name)}`,
         'Set-Cookie': `session=${generateUnixToken(APP_SECRET_KEY)}; Path=/player/; HttpOnly; Secure; SameSite=Lax`
       }
     } : {
       status: 302,
       headers: {
-        'Location': `dashboard/home?data=${encodeURIComponent(JSON.stringify(tData))}&merchant_name=${merchant_name}`,
+        'Location': `dashboard/home?data=${encodeURIComponent(JSON.stringify(tData))}&merchant_name=${encodeURIComponent(merchant_name)}`,
         'Set-Cookie': `session=${generateUnixToken(APP_SECRET_KEY)}; Path=/player/; HttpOnly; Secure; SameSite=Lax`
       }
     }

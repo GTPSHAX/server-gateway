@@ -53,23 +53,13 @@ export const metadata: Metadata = {
     description: APP_DESCRIPTION,
     url: APP_URL,
     siteName: APP_TITLE,
-    images: [
-      {
-        url: `${APP_URL}/og-image.jpg`,
-        width: 1200,
-        height: 630,
-        alt: APP_NAME
-      }
-    ],
     locale: "en_US",
     type: "website",
   },
   
   twitter: {
-    card: "summary_large_image",
     title: APP_NAME,
     description: APP_DESCRIPTION,
-    images: [`${APP_URL}/twitter-image.jpg`],
     creator: APP_CREATOR,
   },
   
@@ -99,8 +89,8 @@ export const metadata: Metadata = {
   
   icons: {
     icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
   
   manifest: "/manifest.json",
@@ -111,11 +101,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  userScalable: false,
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#113F67" },
-    { media: "(prefers-color-scheme: light)", color: "#34699A" },
-  ],
+  userScalable: false
 };
 
 export default function RootLayout({
@@ -130,6 +116,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         <link rel="preload" href="/fonts/pixel-font7.ttf" as="font" type="font/ttf" crossOrigin="anonymous" /> */}
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </head>
       <body
         className={`antialiased min-h-screen text-foreground ${pixel_font7.className}`}

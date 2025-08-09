@@ -1,5 +1,5 @@
 {
-  "merchant": "../merchant/test.json",
+  "merchant": "../merchants/admin.json",
   "servers": [
     {
       "name": "MY SERVER",

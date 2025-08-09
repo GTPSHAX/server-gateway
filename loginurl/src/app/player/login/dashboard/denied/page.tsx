@@ -18,11 +18,11 @@ export default async function Page({
 }) {
   const cookiesStore = await cookies();
   const sessionCookie = cookiesStore.get('session')?.value;
-  if (!sessionCookie || validateUnixToken(sessionCookie, APP_SECRET_KEY, { maxAgeSeconds: 10 }) === false) {
+  if (!sessionCookie || !validateUnixToken(sessionCookie, APP_SECRET_KEY, { maxAgeSeconds: 10 })) {
     return notFound();
   }
 
-  const merchant_name = (await searchParams)?.merchant_name ?? '';
+  const merchant_name = decodeURIComponent((await searchParams)?.merchant_name as string) ?? '';
 
   return (
     <div className='w-screen h-screen flex justify-center items-center scale-y-85 bg-transparent bg-none'>
