@@ -1,0 +1,22 @@
+{
+  "name": "api",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "bun src/index.ts"
+  },
+  "dependencies": {
+    "@maxmind/geoip2-node": "^6.1.0",
+    "consola": "^3.4.2",
+    "fastify": "^5.4.0",
+    "openai": "^5.12.2"
+  }
+}
