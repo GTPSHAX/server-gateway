@@ -11,6 +11,9 @@ add_compile_options(/utf-8)
 file(GLOB UTILS_SRC
   src/utils/*.cpp
 )
+file(GLOB SERVER_HANDLER_SRC
+  src/server/handler/*.cpp
+)
 
 # Tambahkan executable
 add_executable(logon-server
@@ -18,6 +21,7 @@ add_executable(logon-server
   src/server/ENetServer.cpp
   src/server/ENetServer_static.cpp
   ${UTILS_SRC}
+  ${SERVER_HANDLER_SRC}
 )
 
 # Terapkan compile options ke target specific
