@@ -1,0 +1,47 @@
+{
+  "version": 8,
+  "configurePresets": [
+    {
+      "name": "vs2022-x86-debug",
+      "displayName": "Visual Studio 2022 - x86 - Debug",
+      "description": "Using compilers for Visual Studio 17 2022 (x86 architecture)",
+      "generator": "Visual Studio 17 2022",
+      "toolset": "host=x86",
+      "architecture": "win32",
+      "binaryDir": "${sourceDir}/out/Debug",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe"
+      }
+    },
+    {
+      "name": "vs2022-x86-release",
+      "displayName": "Visual Studio 2022 - x86 - Release",
+      "description": "Using compilers for Visual Studio 17 2022 (x86 architecture)",
+      "generator": "Visual Studio 17 2022",
+      "toolset": "host=x86",
+      "architecture": "win32",
+      "binaryDir": "${sourceDir}/out/Release",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "vs2022-x86-debug",
+      "displayName": "Visual Studio 2022 - x86 - Debug",
+      "configurePreset": "vs2022-x86-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "vs2022-x86-release",
+      "displayName": "Visual Studio 2022 - x86 - Release",
+      "configurePreset": "vs2022-x86-release",
+      "configuration": "Release"
+    }
+  ]
+}

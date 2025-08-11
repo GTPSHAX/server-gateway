@@ -1,0 +1,15 @@
+[submodule "logon-server/srclibsenet"]
+	path = logon-server/srclibsenet
+	url = https://github.com/GTPSHAX/how-to-fix-growtopia-5.15.git
+[submodule "logon-server/server-gateway/libs/enet"]
+	path = logon-server/server-gateway/libs/enet
+	url = https://github.com/GTPSHAX/how-to-fix-growtopia-5.15.git
+[submodule "logon-server/src/libs/enet"]
+	path = logon-server/src/libs/enet
+	url = https://github.com/GTPSHAX/how-to-fix-growtopia-5.15.git
+[submodule "logon-server/src/libs/fmt"]
+	path = logon-server/src/libs/fmt
+	url = https://github.com/fmtlib/fmt.git
+[submodule "logon-server/src/libs/nlohmann-json"]
+	path = logon-server/src/libs/nlohmann-json
+	url = https://github.com/nlohmann/json.git
