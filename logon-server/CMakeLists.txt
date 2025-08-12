@@ -7,6 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Tambahkan compile options untuk UTF-8
 add_compile_options(/utf-8)
+add_compile_definitions(/FS)
 
 file(GLOB UTILS_SRC
   src/utils/*.cpp
@@ -33,10 +34,15 @@ target_include_directories(logon-server PRIVATE
   src/libs/enet/include
   src/libs/fmt/include
   src/libs/nlohmann-json/include
+  src/libs/curl/include
 )
 
 add_subdirectory(src/libs/enet)
 add_subdirectory(src/libs/fmt)
 
 # Link libraries
-target_link_libraries(logon-server enet fmt)
+target_link_libraries(logon-server
+enet
+fmt
+${CMAKE_CURRENT_SOURCE_DIR}/src/libs/curl/lib/libcurl.lib
+)

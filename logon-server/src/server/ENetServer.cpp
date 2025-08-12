@@ -2,17 +2,16 @@
 
 #include <utils/ConsoleInterface.h>
 
-ENetServer::ENetServer(const ENetAddress& address) {
-  m_address = address;
+ENetServer::ENetServer(const ENetAddress& address): m_address(address) {
+  std::string host = get_host_ip(&m_address);
 
-  std::string host;
-  try {
-    host = get_host_ip(&m_address);
+  m_server = enet_host_create(&m_address, m_max_peer, 0, m_max_incoming_bandwidth, m_max_outgoing_bandwidth);
+  if (m_server == nullptr) {
+    throw std::runtime_error("Failed to creating enet server.");
   }
-  catch (const std::runtime_error& e) {
-    print_error("{}", e.what());
-    host = (char*)"null";
-  }
+  m_server->checksum = enet_crc32;
+  m_server->usingNewPacketForServer = 1;
+  enet_host_compress_with_range_coder(m_server);
 
   print_debug("New ENetServer created {}:{}", host, m_address.port);
 }
@@ -33,4 +32,46 @@ ENetServer::~ENetServer() {
   m_server = nullptr;
   m_address.host = 0;
   m_address.port = 0;
+}
+std::thread* ENetServer::service() {
+  m_service_thread = std::thread([&] {
+    ENetEvent event;
+    std::string sIP = get_host_ip(&m_address);
+    print_success("ENetServer started with {}:{}", sIP, m_address.port);
+
+    while (true) {
+      if (!m_server || m_server == nullptr) {
+        throw std::runtime_error("Server is null pointer.");
+      }
+      if (m_paused) {
+        continue;
+      }
+      
+      if (enet_host_service(m_server, &event, 100) > 0) {
+        ENetPeer* peer = event.peer;
+        std::string pIP = get_host_ip(&peer->address);
+
+        switch (event.type) {
+          case ENET_EVENT_TYPE_CONNECT: {
+            print_debug("[{}:{}] Peer with {}:{} connected to server.", sIP, m_address.port, pIP, peer->address.port);
+            break;
+          }
+          case ENET_EVENT_TYPE_RECEIVE: {
+            print_debug("[{}:{}] Packet receive from Peer {}:{}.", sIP, m_address.port, pIP, peer->address.port);
+            break;
+          }
+          case ENET_EVENT_TYPE_DISCONNECT: {
+            print_debug("[{}:{}] Player with {}:{} disconnected from server.", sIP, m_address.port, pIP, peer->address.port);
+            break;
+          }
+          default: {
+            print_warning("Unknown event type rechived from peer {}:{}", pIP, peer->address.port);
+            break;
+          }
+        }
+      }
+    }
+  });
+
+  return &m_service_thread;
 }

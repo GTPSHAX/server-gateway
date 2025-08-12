@@ -8,12 +8,10 @@
 #include "server/handler/NetMessageGenericText.h"
 
 int main(int, char**){
+  enet_initialize();
+
   // Intro cenutttt
   print_info("Developed by: @oxygenbro");
-  ConsoleInterface::show_loading("Initialize enet...", [&]{
-    enet_initialize();
-  });
-  print_info("Enet initialized.");
   ConsoleInterface::show_loading("Loading...", [&] {
     // Generate random seed for srand by time
     std::srand(static_cast<unsigned int>(std::time(NULL)));
@@ -25,11 +23,18 @@ int main(int, char**){
   print_info("Loaded {} NetMessageGenericText handler.", temp_val);
 
   ENetAddress address;
-  std::string ip = "127.0.0.1";
+  std::string ip = "0.0.0.0";
   enet_address_set_host(&address, ip.c_str());
   address.port = 17090;
-  ENetServer app(address);
-  std::cin.get();
 
+  try {
+    ENetServer app(address);
+    app.service()->join();
+  }
+  catch (const std::runtime_error& e) {
+    print_error("{}", e.what());
+  }
+
+  enet_deinitialize();
   return 0;
 }

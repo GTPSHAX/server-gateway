@@ -647,19 +647,23 @@ void ConsoleInterface::show_loading(const std::string& message, std::function<vo
     std::thread([&] {
         while (!done) {
             clear_line();
-            if (m_ansi_supported) {
-                fmt::print("{}{} {}{}\r",
-                    fmt::styled(spinner[spinner_idx], fmt::fg(to_fmt_color(color))),
-                    fmt::styled(" ", fmt::fg(to_fmt_color(color))),
-                    fmt::styled(message, fmt::fg(to_fmt_color(color))),
-                    fmt::styled("...", fmt::fg(to_fmt_color(color)))
-                );
-            }
-            else {
-                fmt::print("Loading {} ...\r", spinner[spinner_idx]);
-            }
+            try {
+                if (m_ansi_supported) {
+                    fmt::print("{}{} {}{}\r",
+                        fmt::styled(spinner[spinner_idx], fmt::fg(to_fmt_color(color))),
+                        fmt::styled(" ", fmt::fg(to_fmt_color(color))),
+                        fmt::styled(message, fmt::fg(to_fmt_color(color))),
+                        fmt::styled("...", fmt::fg(to_fmt_color(color)))
+                    );
+                }
+                else {
+                    fmt::print("Loading {} ...\r", spinner[spinner_idx]);
+                }
 
-            spinner_idx = spinner_idx >= spinner.size() - 1 ? 0 : spinner_idx + 1;
+                spinner_idx = spinner_idx >= spinner.size() - 1 ? 0 : spinner_idx + 1;
+            }
+            catch (...) {}
+
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
 		}).detach();
