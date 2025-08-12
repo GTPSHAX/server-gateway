@@ -1,6 +1,7 @@
 #include "ENetServer.h"
 
 #include <utils/ConsoleInterface.h>
+#include <utils/Curl.h>
 
 ENetServer::ENetServer(const ENetAddress& address): m_address(address) {
   std::string host = get_host_ip(&m_address);
@@ -53,6 +54,16 @@ std::thread* ENetServer::service() {
 
         switch (event.type) {
           case ENET_EVENT_TYPE_CONNECT: {
+            Curl curl;
+            curl.setUrl("http://localhost:8080/check-ip/" + pIP);
+            curl.setTimeout(5);
+            curl.setSSLVerification(false);
+
+            if (curl.perform()) {
+              nlohmann::json response = nlohmann::json::parse(curl.getResponseData());
+              print_debug("{}", response.dump(4));
+            }
+
             print_debug("[{}:{}] Peer with {}:{} connected to server.", sIP, m_address.port, pIP, peer->address.port);
             break;
           }

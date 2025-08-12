@@ -34,15 +34,15 @@ target_include_directories(logon-server PRIVATE
   src/libs/enet/include
   src/libs/fmt/include
   src/libs/nlohmann-json/include
-  src/libs/curl/include
 )
 
 add_subdirectory(src/libs/enet)
 add_subdirectory(src/libs/fmt)
 
 # Link libraries
+find_package(CURL REQUIRED)
 target_link_libraries(logon-server
-enet
-fmt
-${CMAKE_CURRENT_SOURCE_DIR}/src/libs/curl/lib/libcurl.lib
+  enet
+  fmt
+  CURL::libcurl
 )

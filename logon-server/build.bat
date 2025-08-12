@@ -12,7 +12,7 @@ if "%1"=="--release" (
 )
 
 REM Build dengan CMake preset
-cmake --preset vs2022-x86-%CONFIG_NAME%
+cmake --preset vs2022-x64-%CONFIG_NAME%
 cmake --build out\%CONFIG% --config %CONFIG%
 
 REM Hapus folder bin jika ada

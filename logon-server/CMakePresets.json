@@ -2,45 +2,47 @@
   "version": 8,
   "configurePresets": [
     {
-      "name": "vs2022-x86-debug",
-      "displayName": "Visual Studio 2022 - x86 - Debug",
-      "description": "Using compilers for Visual Studio 17 2022 (x86 architecture)",
+      "name": "vs2022-x64-debug",
+      "displayName": "Visual Studio 2022 - x64 - Debug",
+      "description": "Using compilers for Visual Studio 17 2022 (x64 architecture)",
       "generator": "Visual Studio 17 2022",
-      "toolset": "host=x86",
-      "architecture": "win32",
+      "toolset": "host=x64",
+      "architecture": "x64",
       "binaryDir": "${sourceDir}/out/Debug",
       "cacheVariables": {
         "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
         "CMAKE_C_COMPILER": "cl.exe",
-        "CMAKE_CXX_COMPILER": "cl.exe"
+        "CMAKE_CXX_COMPILER": "cl.exe",
+        "CMAKE_TOOLCHAIN_FILE": "C:/vcpkg/scripts/buildsystems/vcpkg.cmake"
       }
     },
     {
-      "name": "vs2022-x86-release",
-      "displayName": "Visual Studio 2022 - x86 - Release",
-      "description": "Using compilers for Visual Studio 17 2022 (x86 architecture)",
+      "name": "vs2022-x64-release",
+      "displayName": "Visual Studio 2022 - x64 - Release",
+      "description": "Using compilers for Visual Studio 17 2022 (x64 architecture)",
       "generator": "Visual Studio 17 2022",
-      "toolset": "host=x86",
-      "architecture": "win32",
+      "toolset": "host=x64",
+      "architecture": "x64",
       "binaryDir": "${sourceDir}/out/Release",
       "cacheVariables": {
         "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
         "CMAKE_C_COMPILER": "cl.exe",
-        "CMAKE_CXX_COMPILER": "cl.exe"
+        "CMAKE_CXX_COMPILER": "cl.exe",
+        "CMAKE_TOOLCHAIN_FILE": "C:/vcpkg/scripts/buildsystems/vcpkg.cmake"
       }
     }
   ],
   "buildPresets": [
     {
-      "name": "vs2022-x86-debug",
-      "displayName": "Visual Studio 2022 - x86 - Debug",
-      "configurePreset": "vs2022-x86-debug",
+      "name": "vs2022-x64-debug",
+      "displayName": "Visual Studio 2022 - x64 - Debug",
+      "configurePreset": "vs2022-x64-debug",
       "configuration": "Debug"
     },
     {
-      "name": "vs2022-x86-release",
-      "displayName": "Visual Studio 2022 - x86 - Release",
-      "configurePreset": "vs2022-x86-release",
+      "name": "vs2022-x64-release",
+      "displayName": "Visual Studio 2022 - x64 - Release",
+      "configurePreset": "vs2022-x64-release",
       "configuration": "Release"
     }
   ]
