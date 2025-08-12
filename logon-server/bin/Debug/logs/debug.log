@@ -1,19 +1,7 @@
-[Tue Aug 12 03:18:50 2025] ENetServer.cpp:17:ENetServer::ENetServer | New ENetServer created 0.0.0.0:17090
-[Tue Aug 12 03:19:13 2025] ENetServer.cpp:64:ENetServer::service::<lambda_1>::operator () | {
-    "is_proxy": false,
-    "is_vpn": false,
-    "is_vps": false,
-    "presentence": 0
-}
-[Tue Aug 12 03:19:13 2025] ENetServer.cpp:67:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:33235 connected to server.
-[Tue Aug 12 03:19:21 2025] ENetServer.cpp:75:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:33235 disconnected from server.
-[Tue Aug 12 03:19:48 2025] ENetServer.cpp:67:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:40303 connected to server.
-[Tue Aug 12 03:19:59 2025] ENetServer.cpp:75:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:40303 disconnected from server.
-[Tue Aug 12 03:20:18 2025] ENetServer.cpp:64:ENetServer::service::<lambda_1>::operator () | {
-    "is_proxy": false,
-    "is_vpn": false,
-    "is_vps": false,
-    "presentence": 0
-}
-[Tue Aug 12 03:20:18 2025] ENetServer.cpp:67:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:41204 connected to server.
-[Tue Aug 12 03:20:27 2025] ENetServer.cpp:75:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:41204 disconnected from server.
+[Tue Aug 12 09:13:53 2025] ENetServer.cpp:25:ENetServer::ENetServer | New ENetServer created 0.0.0.0:17090
+[Tue Aug 12 09:14:13 2025] ENetServer.cpp:69:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:44881 connected to server.
+[Tue Aug 12 09:14:18 2025] ENetServer.cpp:115:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:44881 >> protocol|216
+ltoken|X3Rva2VuPXsidGFua0lETmFtZSI6IiIsInRhbmtJRFBhc3MiOiIiLCJyZXF1ZXN0ZWROYW1lIjoiIiwiZiI6IjEiLCJwcm90b2NvbCI6IjIxNiIsImdhbWVfdmVyc2lvbiI6IjUuMjUiLCJjYml0cyI6IjEwMjQiLCJwbGF5ZXJfYWdlIjoiMjQiLCJHRFBSIjoiMiIsImNhdGVnb3J5IjoiXy01MTAwIiwidG90YWxQbGF5dGltZSI6IjAiLCJrbHYiOiJDQjI1ODc0RDM2QzdDOUJBMzdCMjg0NDRFRDc2NDY3MSIsImdpZCI6ImNhM2JjZDhiLWViMzAtNDA1Yy05NDczLWZkZTI3NTM0M2QyMyIsInRyIjoiNDMyMiIsIm1ldGEiOiJtZXJjaGFudD1hZG1pbiZrZXk9bmFnYXdpYnUiLCJmaGFzaCI6Ii03MTY5MjgwMDQiLCJyaWQiOiIwMjJDNjcyOTcwMjhCMjUwMDUxNEY2MDIyRkUzNDg0NiIsInBsYXRmb3JtSUQiOiI0IiwiZGV2aWNlVmVyc2lvbiI6IjAiLCJjb3VudHJ5IjoiaWQiLCJoYXNoIjoiLTg3MzE1MzA0OCIsIm1hYyI6IjAyOjAwOjAwOjAwOjAwOjAwIiwid2siOiJOT05FMCJ9Jl9zZXNzaW9uPU1UYzFORGMxTmpJek9RLloxUW9ReDZCTHRtMFI0Z0VEV09HMWJkREtjaXNLU04xcmVINTgyMk9xdk0mbWVyY2hhbnRfbmFtZT1PeHlnZW4gSG9zdGluZyZncm93SWQ9T3h5Z2VuJnBhc3N3b3JkPWlIYXgxMWlIYXg=
+platformID|4
+
+[Tue Aug 12 09:14:18 2025] NetMessageGenericText_static.cpp:59:NetMessageGenericTextHandler::ltoken | ltoken: X3Rva2VuPXsidGFua0lETmFtZSI6IiIsInRhbmtJRFBhc3MiOiIiLCJyZXF1ZXN0ZWROYW1lIjoiIiwiZiI6IjEiLCJwcm90b2NvbCI6IjIxNiIsImdhbWVfdmVyc2lvbiI6IjUuMjUiLCJjYml0cyI6IjEwMjQiLCJwbGF5ZXJfYWdlIjoiMjQiLCJHRFBSIjoiMiIsImNhdGVnb3J5IjoiXy01MTAwIiwidG90YWxQbGF5dGltZSI6IjAiLCJrbHYiOiJDQjI1ODc0RDM2QzdDOUJBMzdCMjg0NDRFRDc2NDY3MSIsImdpZCI6ImNhM2JjZDhiLWViMzAtNDA1Yy05NDczLWZkZTI3NTM0M2QyMyIsInRyIjoiNDMyMiIsIm1ldGEiOiJtZXJjaGFudD1hZG1pbiZrZXk9bmFnYXdpYnUiLCJmaGFzaCI6Ii03MTY5MjgwMDQiLCJyaWQiOiIwMjJDNjcyOTcwMjhCMjUwMDUxNEY2MDIyRkUzNDg0NiIsInBsYXRmb3JtSUQiOiI0IiwiZGV2aWNlVmVyc2lvbiI6IjAiLCJjb3VudHJ5IjoiaWQiLCJoYXNoIjoiLTg3MzE1MzA0OCIsIm1hYyI6IjAyOjAwOjAwOjAwOjAwOjAwIiwid2siOiJOT05FMCJ9Jl9zZXNzaW9uPU1UYzFORGMxTmpJek9RLloxUW9ReDZCTHRtMFI0Z0VEV09HMWJkREtjaXNLU04xcmVINTgyMk9xdk0mbWVyY2hhbnRfbmFtZT1PeHlnZW4gSG9zdGluZyZncm93SWQ9T3h5Z2VuJnBhc3N3b3JkPWlIYXgxMWlIYXg=

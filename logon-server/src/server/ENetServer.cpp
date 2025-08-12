@@ -1,7 +1,15 @@
 #include "ENetServer.h"
 
+#include <SDK/Proton/TextScanner.h>
+
 #include <utils/ConsoleInterface.h>
 #include <utils/Curl.h>
+#include <utils/VariantList.h>
+#include <utils/Utils.h>
+
+#include <player/Player.h>
+
+#include "handler/NetMessageGenericText.h"
 
 ENetServer::ENetServer(const ENetAddress& address): m_address(address) {
   std::string host = get_host_ip(&m_address);
@@ -54,21 +62,67 @@ std::thread* ENetServer::service() {
 
         switch (event.type) {
           case ENET_EVENT_TYPE_CONNECT: {
+            if (peer->data != NULL) {
+              enet_peer_disconnect_now(peer, 0);
+              break;
+            }
+            print_debug("[{}:{}] Peer with {}:{} connected to server.", sIP, m_address.port, pIP, peer->address.port);
+
+            peer->data = new Player();
+            PlayerCredentials data = pClient->get_credentials();
+            data.IPv4 = pIP;
+            pClient->set_credentials(data);
+            
+            enet_peer_timeout(peer, 0, 60000, 60000 * 2); 
+            enet_peer_ping_interval(peer, 2);
+
+            VariantList::OnConsoleMessage(peer, "`oConnected on `0Server Gateway``.");
+            VariantList::OnConsoleMessage(peer, "`oValidating request...");
+            enet_host_flush(m_server);
+            
             Curl curl;
             curl.setUrl("http://localhost:8080/check-ip/" + pIP);
             curl.setTimeout(5);
             curl.setSSLVerification(false);
 
             if (curl.perform()) {
-              nlohmann::json response = nlohmann::json::parse(curl.getResponseData());
-              print_debug("{}", response.dump(4));
+              try {
+                nlohmann::json response = nlohmann::json::parse(curl.getResponseData());
+                bool dc = false;
+                if ((response.contains("status") && response["status"] == true) || (response.contains("is_vps") && response["is_vpn"] == true) || (response.contains("is_vps") && response["is_vps"] == true) || (response.contains("is_proxy") && response["is_proxy"] == true)) {
+                  VariantList::OnConsoleMessage(peer, "`o`4Oops``: It appears you're using a `4prohibited third-party application`` or logging in with a `4prohibited address``. If this is a false alert, please contact the `0merchant owner``.");
+                  dc = true;
+                }
+                if (response.contains("presentence") && response["presentence"] >= 85) {
+                  VariantList::OnConsoleMessage(peer, "`o`6Warning``: It appears you're using a `4prohibited third-party application`` or logging in with a `4prohibited address``.");
+                }
+
+                if (dc) {
+                  enet_peer_disconnect_later(peer, 0);
+                  break;
+                }
+              }
+              catch (...) {}
             }
 
-            print_debug("[{}:{}] Peer with {}:{} connected to server.", sIP, m_address.port, pIP, peer->address.port);
+            Utils::SendPacket(peer, 1, nullptr, 0);
             break;
           }
           case ENET_EVENT_TYPE_RECEIVE: {
-            print_debug("[{}:{}] Packet receive from Peer {}:{}.", sIP, m_address.port, pIP, peer->address.port);
+            std::string pkt_txt = get_packet_text(event.packet);
+            TextScanner ctx(pkt_txt.c_str());
+            int packet_type = get_packet_type(event.packet);
+            print_debug("[{}:{}] Packet {} receive from Peer {}:{} >> {}", sIP, m_address.port, packet_type, pIP, peer->address.port, pkt_txt);
+
+            switch(packet_type) {
+              case NET_MESSAGE_GENERIC_TEXT: {
+                NetMessageGenericTextHandler::execute(peer, &ctx);
+                break;
+              }
+              default: {
+                print_warning("Unhandled net packet type: {} sended by peer {}:{}", packet_type, pIP, peer->address.host);
+              }
+            }
             break;
           }
           case ENET_EVENT_TYPE_DISCONNECT: {

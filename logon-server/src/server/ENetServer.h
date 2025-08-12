@@ -2,6 +2,18 @@
 
 #include <BaseApp.h>
 
+enum { 
+  NET_MESSAGE_UNKNOWN = 0, 
+  NET_MESSAGE_SERVER_HELLO, 
+  NET_MESSAGE_GENERIC_TEXT, 
+  NET_MESSAGE_GAME_MESSAGE, 
+  NET_MESSAGE_GAME_PACKET, 
+  NET_MESSAGE_ERROR, 
+  NET_MESSAGE_TRACK, 
+  NET_MESSAGE_CLIENT_LOG_REQUEST, 
+  NET_MESSAGE_CLIENT_LOG_RESPONSE
+};
+
 /**
  * ENetServer
  * Class for managing ENet-based server functionality
@@ -183,5 +195,7 @@ public:
    * std::cout << "Client IP: " << ip << std::endl;
    * @endcode
    */
-  std::string get_host_ip(ENetAddress* address);
+  static std::string get_host_ip(ENetAddress* address);
+  static char* get_packet_text(ENetPacket* pkt);
+  static int get_packet_type(ENetPacket* pkt);
 };

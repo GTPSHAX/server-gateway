@@ -6,8 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Tambahkan compile options untuk UTF-8
-add_compile_options(/utf-8)
-add_compile_definitions(/FS)
+add_compile_options(/utf-8 /FS)
 
 file(GLOB UTILS_SRC
   src/utils/*.cpp
@@ -15,14 +14,21 @@ file(GLOB UTILS_SRC
 file(GLOB SERVER_HANDLER_SRC
   src/server/handler/*.cpp
 )
+file(GLOB PROTON_SDK_SRC
+  src/SDK/**/*.cpp
+  src/SDK/**/**/*.cpp
+)
 
 # Tambahkan executable
 add_executable(logon-server
   src/main.cpp
   src/server/ENetServer.cpp
   src/server/ENetServer_static.cpp
+  src/packet/PacketVariant.cpp
+  src/player/RoleManager.cpp
   ${UTILS_SRC}
   ${SERVER_HANDLER_SRC}
+  ${PROTON_SDK_SRC}
 )
 
 # Terapkan compile options ke target specific
