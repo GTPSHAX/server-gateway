@@ -1,13 +1,14 @@
 ﻿#pragma once
 
-#include <unordered_map>
 #include <string>
 #include <vector>
-#include <memory>
-#include <mutex>
-#include <chrono>
-#include <variant>
 #include <bitset>
+#include <variant>
+#include <chrono>
+#include <unordered_map>
+#include <mutex>
+#include <fmt/format.h>
+#include <fmt/color.h>
 
 /**
  * @fileoverview CacheManager - Lightweight memory cache system with bit-efficient storage

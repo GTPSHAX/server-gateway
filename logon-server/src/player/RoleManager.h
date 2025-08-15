@@ -1,5 +1,13 @@
 ﻿#pragma once
 
+#include <BaseApp.h>
+
+#include <string>
+#include <unordered_map>
+
+#include <utils/ConsoleInterface.h>
+#include <utils/FileSystem2.h>
+
 #include "RoleDef.h"
 
 /**

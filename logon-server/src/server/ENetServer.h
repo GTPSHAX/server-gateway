@@ -2,6 +2,22 @@
 
 #include <BaseApp.h>
 
+#include <thread>
+#include <string>
+
+#include <enet/enet.h>
+
+#include <player/Player.h>
+#include "handler/NetMessageGenericText.h"
+
+#include <utils/ConsoleInterface.h>
+#include <utils/Curl.h>
+#include <utils/VariantList.h>
+#include <utils/Utils.h>
+#include <SDK/Proton/TextScanner.h>
+
+#include <GlobalVar.h>
+
 enum { 
   NET_MESSAGE_UNKNOWN = 0, 
   NET_MESSAGE_SERVER_HELLO, 

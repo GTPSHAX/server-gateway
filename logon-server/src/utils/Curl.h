@@ -1,9 +1,12 @@
-// Curl.h
-#ifndef CURL_H
-#define CURL_H
+#pragma once
 
 #include <BaseApp.h>
-#include <curl/curl.h> // Make sure you have libcurl installed and linked
+
+#include <curl/curl.h>
+#include <string>
+#include <map>
+#include <iostream>
+#include <sstream>
 
 /**
  * @brief Utility class to simplify HTTP requests using libcurl.
@@ -210,5 +213,3 @@ private:
         size_t size;        ///< Remaining size of the data.
     };
 };
-
-#endif // CURL_H

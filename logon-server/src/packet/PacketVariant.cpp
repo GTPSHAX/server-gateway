@@ -1,5 +1,4 @@
 #include "PacketVariant.h"
-#include <utils/Utils.h>
 
 PacketVariant::PacketVariant (int delay , int NetID) {
   len = 61;

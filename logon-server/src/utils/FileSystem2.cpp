@@ -1,8 +1,4 @@
 ﻿#include "FileSystem2.h"
-#include <fstream>
-#include <sstream>
-#include <stdexcept>
-#include <algorithm>
 
 namespace FileSystem2 {
 
@@ -82,6 +78,12 @@ namespace FileSystem2 {
         catch (const nlohmann::json::exception& e) {
             throw std::runtime_error("Invalid JSON in file: " + filePath + " (" + e.what() + ")");
         }
+        catch (const std::runtime_error& e) {
+            throw std::runtime_error("readJson failed: " + std::string(e.what()));
+        }
+        catch (const std::exception& e) {
+            throw std::runtime_error("readJson failed: " + std::string(e.what()));
+        }
     }
 
     void writeJson(const std::string& filePath, const nlohmann::json& jsonData, int indent) {
@@ -91,6 +93,12 @@ namespace FileSystem2 {
         }
         catch (const nlohmann::json::exception& e) {
             throw std::runtime_error("Failed to serialize JSON to file: " + filePath + " (" + e.what() + ")");
+        }
+        catch (const std::runtime_error& e) {
+            throw std::runtime_error("writeJson failed: " + std::string(e.what()));
+        }
+        catch (const std::exception& e) {
+            throw std::runtime_error("writeJson failed: " + std::string(e.what()));
         }
     }
 

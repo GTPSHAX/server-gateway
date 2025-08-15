@@ -1,11 +1,10 @@
-#include <iostream>
+#include "BaseApp.h"
 
-#include <BaseApp.h>
 #include "server/ENetServer.h"
+#include "server/handler/NetMessageGenericText.h"
+#include "server/DataManager.h"
 
 #include "utils/ConsoleInterface.h"
-
-#include "server/handler/NetMessageGenericText.h"
 
 int main(int, char**){
   enet_initialize();
@@ -13,6 +12,8 @@ int main(int, char**){
   // Intro cenutttt
   print_info("Developed by: @oxygenbro");
   ConsoleInterface::show_loading("Loading...", [&] {
+    // Load semua data
+    DataManager::load_all();
     // Generate random seed for srand by time
     std::srand(static_cast<unsigned int>(std::time(NULL)));
   });

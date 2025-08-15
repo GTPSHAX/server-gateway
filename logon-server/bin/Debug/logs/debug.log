@@ -1,7 +1,289 @@
-[Tue Aug 12 09:13:53 2025] ENetServer.cpp:25:ENetServer::ENetServer | New ENetServer created 0.0.0.0:17090
-[Tue Aug 12 09:14:13 2025] ENetServer.cpp:69:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:44881 connected to server.
-[Tue Aug 12 09:14:18 2025] ENetServer.cpp:115:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:44881 >> protocol|216
-ltoken|X3Rva2VuPXsidGFua0lETmFtZSI6IiIsInRhbmtJRFBhc3MiOiIiLCJyZXF1ZXN0ZWROYW1lIjoiIiwiZiI6IjEiLCJwcm90b2NvbCI6IjIxNiIsImdhbWVfdmVyc2lvbiI6IjUuMjUiLCJjYml0cyI6IjEwMjQiLCJwbGF5ZXJfYWdlIjoiMjQiLCJHRFBSIjoiMiIsImNhdGVnb3J5IjoiXy01MTAwIiwidG90YWxQbGF5dGltZSI6IjAiLCJrbHYiOiJDQjI1ODc0RDM2QzdDOUJBMzdCMjg0NDRFRDc2NDY3MSIsImdpZCI6ImNhM2JjZDhiLWViMzAtNDA1Yy05NDczLWZkZTI3NTM0M2QyMyIsInRyIjoiNDMyMiIsIm1ldGEiOiJtZXJjaGFudD1hZG1pbiZrZXk9bmFnYXdpYnUiLCJmaGFzaCI6Ii03MTY5MjgwMDQiLCJyaWQiOiIwMjJDNjcyOTcwMjhCMjUwMDUxNEY2MDIyRkUzNDg0NiIsInBsYXRmb3JtSUQiOiI0IiwiZGV2aWNlVmVyc2lvbiI6IjAiLCJjb3VudHJ5IjoiaWQiLCJoYXNoIjoiLTg3MzE1MzA0OCIsIm1hYyI6IjAyOjAwOjAwOjAwOjAwOjAwIiwid2siOiJOT05FMCJ9Jl9zZXNzaW9uPU1UYzFORGMxTmpJek9RLloxUW9ReDZCTHRtMFI0Z0VEV09HMWJkREtjaXNLU04xcmVINTgyMk9xdk0mbWVyY2hhbnRfbmFtZT1PeHlnZW4gSG9zdGluZyZncm93SWQ9T3h5Z2VuJnBhc3N3b3JkPWlIYXgxMWlIYXg=
+[Thu Aug 14 10:32:42 2025] ENetServer.cpp:14:ENetServer::ENetServer | New ENetServer created 0.0.0.0:17090
+[Thu Aug 14 10:32:53 2025] ENetServer.cpp:14:ENetServer::ENetServer | New ENetServer created 0.0.0.0:17090
+[Thu Aug 14 10:32:59 2025] ENetServer.cpp:14:ENetServer::ENetServer | New ENetServer created 0.0.0.0:17090
+[Thu Aug 14 10:33:03 2025] ENetServer.cpp:14:ENetServer::ENetServer | New ENetServer created 0.0.0.0:17090
+[Thu Aug 14 10:33:25 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:33911 connected to server.
+[Thu Aug 14 10:33:30 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:33911 >> protocol|216
+ltoken|X3Rva2VuPXsidGFua0lETmFtZSI6IiIsInRhbmtJRFBhc3MiOiIiLCJyZXF1ZXN0ZWROYW1lIjoiIiwiZiI6IjEiLCJwcm90b2NvbCI6IjIxNiIsImdhbWVfdmVyc2lvbiI6IjUuMjUiLCJjYml0cyI6IjEwMjQiLCJwbGF5ZXJfYWdlIjoiMjUiLCJHRFBSIjoiMSIsImNhdGVnb3J5IjoiXy01MTAwIiwidG90YWxQbGF5dGltZSI6IjAiLCJrbHYiOiI3QkQ0MUNDREQ2OUVBMTkxMjM4RDkzNjRBMjA3RkVGQSIsImdpZCI6ImNhM2JjZDhiLWViMzAtNDA1Yy05NDczLWZkZTI3NTM0M2QyMyIsInRyIjoiNDMyMiIsIm1ldGEiOiJtZXJjaGFudD1hZG1pbiZrZXk9bmFnYXdpYnUiLCJmaGFzaCI6Ii03MTY5MjgwMDQiLCJyaWQiOiIwMjNDRTFGQjA0MkY2NkJEMDUwQzJDMTRDRUUzNDA2QSIsInBsYXRmb3JtSUQiOiI0IiwiZGV2aWNlVmVyc2lvbiI6IjAiLCJjb3VudHJ5IjoiaWQiLCJoYXNoIjoiLTg3MzE1MzA0OCIsIm1hYyI6IjAyOjAwOjAwOjAwOjAwOjAwIiwid2siOiJOT05FMCJ9Jl9zZXNzaW9uPU1UYzFOVEU1TWpnd05RLmxjQUlacURGZkFTQkltYUpRNHU1QldFb3NtUW43U1hrWUxPai1UUVpkdGMmbWVyY2hhbnRfbmFtZT1PeHlnZW4gSG9zdGluZyZncm93SWQ9JnBhc3N3b3JkPQ==
 platformID|4
 
-[Tue Aug 12 09:14:18 2025] NetMessageGenericText_static.cpp:59:NetMessageGenericTextHandler::ltoken | ltoken: X3Rva2VuPXsidGFua0lETmFtZSI6IiIsInRhbmtJRFBhc3MiOiIiLCJyZXF1ZXN0ZWROYW1lIjoiIiwiZiI6IjEiLCJwcm90b2NvbCI6IjIxNiIsImdhbWVfdmVyc2lvbiI6IjUuMjUiLCJjYml0cyI6IjEwMjQiLCJwbGF5ZXJfYWdlIjoiMjQiLCJHRFBSIjoiMiIsImNhdGVnb3J5IjoiXy01MTAwIiwidG90YWxQbGF5dGltZSI6IjAiLCJrbHYiOiJDQjI1ODc0RDM2QzdDOUJBMzdCMjg0NDRFRDc2NDY3MSIsImdpZCI6ImNhM2JjZDhiLWViMzAtNDA1Yy05NDczLWZkZTI3NTM0M2QyMyIsInRyIjoiNDMyMiIsIm1ldGEiOiJtZXJjaGFudD1hZG1pbiZrZXk9bmFnYXdpYnUiLCJmaGFzaCI6Ii03MTY5MjgwMDQiLCJyaWQiOiIwMjJDNjcyOTcwMjhCMjUwMDUxNEY2MDIyRkUzNDg0NiIsInBsYXRmb3JtSUQiOiI0IiwiZGV2aWNlVmVyc2lvbiI6IjAiLCJjb3VudHJ5IjoiaWQiLCJoYXNoIjoiLTg3MzE1MzA0OCIsIm1hYyI6IjAyOjAwOjAwOjAwOjAwOjAwIiwid2siOiJOT05FMCJ9Jl9zZXNzaW9uPU1UYzFORGMxTmpJek9RLloxUW9ReDZCTHRtMFI0Z0VEV09HMWJkREtjaXNLU04xcmVINTgyMk9xdk0mbWVyY2hhbnRfbmFtZT1PeHlnZW4gSG9zdGluZyZncm93SWQ9T3h5Z2VuJnBhc3N3b3JkPWlIYXgxMWlIYXg=
+[Thu Aug 14 10:33:31 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:33911 disconnected from server.
+[Thu Aug 14 10:33:31 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:38991 connected to server.
+[Thu Aug 14 10:33:33 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:38991 >> tankIDName|
+tankIDPass|
+requestedName|
+f|1
+protocol|216
+game_version|5.25
+cbits|1024
+player_age|25
+GDPR|1
+category|_-5100
+totalPlaytime|0
+klv|7BD41CCDD69EA191238D9364A207FEFA
+gid|ca3bcd8b-eb30-405c-9473-fde275343d23
+tr|4322
+meta|merchant=admin&key=nagawibu
+fhash|-716928004
+rid|023CE1FB042F66BD050C2C14CEE3406A
+platformID|4
+deviceVersion|0
+country|id
+hash|-873153048
+mac|02:00:00:00:00:00
+wk|NONE0
+lmode|0
+user|2085614333
+token|2134964464
+UUIDToken|MTc1NTE5MjgwNQ.lcAIZqDFfASBImaJQ4u5BWEosmQn7SXkYLOj-TQZdtc
+doorID|Oxygen Hosting
+aat|2
+[Thu Aug 14 10:33:33 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:56721 connected to server.
+[Thu Aug 14 10:33:35 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:56721 >> tankIDName|
+tankIDPass|
+requestedName|
+f|1
+protocol|216
+game_version|5.25
+cbits|1024
+player_age|25
+GDPR|1
+category|_-5100
+totalPlaytime|0
+klv|7BD41CCDD69EA191238D9364A207FEFA
+gid|ca3bcd8b-eb30-405c-9473-fde275343d23
+tr|4322
+meta|merchant=admin&key=nagawibu
+fhash|-716928004
+rid|023CE1FB042F66BD050C2C14CEE3406A
+platformID|4
+deviceVersion|0
+country|id
+hash|-873153048
+mac|02:00:00:00:00:00
+wk|NONE0
+lmode|1
+user|-1008228462
+UUIDToken|MTc1NTE5MjgwNQ.lcAIZqDFfASBImaJQ4u5BWEosmQn7SXkYLOj-TQZdtc
+doorID|Oxygen Hosting
+aat|2
+[Thu Aug 14 10:33:38 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 3 receive from Peer 103.51.205.190:56721 >> action|quit
+[Thu Aug 14 10:33:47 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:56697 connected to server.
+[Thu Aug 14 10:33:49 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:56697 >> protocol|216
+ltoken|X3Rva2VuPXsidGFua0lETmFtZSI6IiIsInRhbmtJRFBhc3MiOiIiLCJyZXF1ZXN0ZWROYW1lIjoiIiwiZiI6IjEiLCJwcm90b2NvbCI6IjIxNiIsImdhbWVfdmVyc2lvbiI6IjUuMjUiLCJjYml0cyI6IjEwMjQiLCJwbGF5ZXJfYWdlIjoiMjUiLCJHRFBSIjoiMSIsImNhdGVnb3J5IjoiXy01MTAwIiwidG90YWxQbGF5dGltZSI6IjAiLCJrbHYiOiI3QkQ0MUNDREQ2OUVBMTkxMjM4RDkzNjRBMjA3RkVGQSIsImdpZCI6ImNhM2JjZDhiLWViMzAtNDA1Yy05NDczLWZkZTI3NTM0M2QyMyIsInRyIjoiNDMyMiIsIm1ldGEiOiJtZXJjaGFudD1hZG1pbiZrZXk9bmFnYXdpYnUiLCJmaGFzaCI6Ii03MTY5MjgwMDQiLCJyaWQiOiIwMjNDRTFGQjA0MkY2NkJEMDUwQzJDMTRDRUUzNDA2QSIsInBsYXRmb3JtSUQiOiI0IiwiZGV2aWNlVmVyc2lvbiI6IjAiLCJjb3VudHJ5IjoiaWQiLCJoYXNoIjoiLTg3MzE1MzA0OCIsIm1hYyI6IjAyOjAwOjAwOjAwOjAwOjAwIiwid2siOiJOT05FMCJ9Jl9zZXNzaW9uPU1UYzFOVEU1TWpneU53Lno4UWZUd2FBMWpQa3ZDdFdlWGZpcGpBVEhqakZYUll5NzRxUWFlajlnVm8mbWVyY2hhbnRfbmFtZT1PeHlnZW4gSG9zdGluZyZncm93SWQ9JnBhc3N3b3JkPQ==
+platformID|4
+
+[Thu Aug 14 10:33:49 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:56697 disconnected from server.
+[Thu Aug 14 10:33:49 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:51940 connected to server.
+[Thu Aug 14 10:33:51 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:38991 disconnected from server.
+[Thu Aug 14 10:33:51 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:51940 >> tankIDName|
+tankIDPass|
+requestedName|
+f|1
+protocol|216
+game_version|5.25
+cbits|1024
+player_age|25
+GDPR|1
+category|_-5100
+totalPlaytime|0
+klv|7BD41CCDD69EA191238D9364A207FEFA
+gid|ca3bcd8b-eb30-405c-9473-fde275343d23
+tr|4322
+meta|merchant=admin&key=nagawibu
+fhash|-716928004
+rid|023CE1FB042F66BD050C2C14CEE3406A
+platformID|4
+deviceVersion|0
+country|id
+hash|-873153048
+mac|02:00:00:00:00:00
+wk|NONE0
+lmode|0
+user|728279451
+UUIDToken|MTc1NTE5MjgyNw.z8QfTwaA1jPkvCtWeXfipjATHjjFXRYy74qQaej9gVo
+doorID|Oxygen Hosting
+aat|2
+[Thu Aug 14 10:33:56 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 3 receive from Peer 103.51.205.190:51940 >> action|quit
+[Thu Aug 14 10:33:59 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:56721 disconnected from server.
+[Thu Aug 14 10:34:01 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:48032 connected to server.
+[Thu Aug 14 10:34:03 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:48032 >> protocol|216
+ltoken|X3Rva2VuPXsidGFua0lETmFtZSI6IiIsInRhbmtJRFBhc3MiOiIiLCJyZXF1ZXN0ZWROYW1lIjoiIiwiZiI6IjEiLCJwcm90b2NvbCI6IjIxNiIsImdhbWVfdmVyc2lvbiI6IjUuMjUiLCJjYml0cyI6IjEwMjQiLCJwbGF5ZXJfYWdlIjoiMjUiLCJHRFBSIjoiMSIsImNhdGVnb3J5IjoiXy01MTAwIiwidG90YWxQbGF5dGltZSI6IjAiLCJrbHYiOiI3QkQ0MUNDREQ2OUVBMTkxMjM4RDkzNjRBMjA3RkVGQSIsImdpZCI6ImNhM2JjZDhiLWViMzAtNDA1Yy05NDczLWZkZTI3NTM0M2QyMyIsInRyIjoiNDMyMiIsIm1ldGEiOiJtZXJjaGFudD1hZG1pbiZrZXk9bmFnYXdpYnUiLCJmaGFzaCI6Ii03MTY5MjgwMDQiLCJyaWQiOiIwMjNDRTFGQjA0MkY2NkJEMDUwQzJDMTRDRUUzNDA2QSIsInBsYXRmb3JtSUQiOiI0IiwiZGV2aWNlVmVyc2lvbiI6IjAiLCJjb3VudHJ5IjoiaWQiLCJoYXNoIjoiLTg3MzE1MzA0OCIsIm1hYyI6IjAyOjAwOjAwOjAwOjAwOjAwIiwid2siOiJOT05FMCJ9Jl9zZXNzaW9uPU1UYzFOVEU1TWpnME1RLlR6bll6UWxTSnVlZGt1UU5EYTFHblA3cVR6N0k5NzNpelVlSURXQWVNTkUmbWVyY2hhbnRfbmFtZT1PeHlnZW4gSG9zdGluZyZncm93SWQ9JnBhc3N3b3JkPQ==
+platformID|4
+
+[Thu Aug 14 10:34:03 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:40020 connected to server.
+[Thu Aug 14 10:34:05 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:40020 >> tankIDName|
+tankIDPass|
+requestedName|
+f|1
+protocol|216
+game_version|5.25
+cbits|1024
+player_age|25
+GDPR|1
+category|_-5100
+totalPlaytime|0
+klv|7BD41CCDD69EA191238D9364A207FEFA
+gid|ca3bcd8b-eb30-405c-9473-fde275343d23
+tr|4322
+meta|merchant=admin&key=nagawibu
+fhash|-716928004
+rid|023CE1FB042F66BD050C2C14CEE3406A
+platformID|4
+deviceVersion|0
+country|id
+hash|-873153048
+mac|02:00:00:00:00:00
+wk|NONE0
+lmode|0
+user|-177486017
+UUIDToken|MTc1NTE5Mjg0MQ.TznYzQlSJuedkuQNDa1GnP7qTz7I973izUeIDWAeMNE
+doorID|Oxygen Hosting
+aat|2
+[Thu Aug 14 10:34:12 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:51940 disconnected from server.
+[Thu Aug 14 10:34:20 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:48032 disconnected from server.
+[Thu Aug 14 10:34:22 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:40020 disconnected from server.
+[Thu Aug 14 10:39:36 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:39049 connected to server.
+[Thu Aug 14 10:39:39 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:39049 >> protocol|216
+ltoken|X3Rva2VuPXsidGFua0lETmFtZSI6IiIsInRhbmtJRFBhc3MiOiIiLCJyZXF1ZXN0ZWROYW1lIjoiIiwiZiI6IjEiLCJwcm90b2NvbCI6IjIxNiIsImdhbWVfdmVyc2lvbiI6IjUuMjUiLCJjYml0cyI6IjEwMjQiLCJwbGF5ZXJfYWdlIjoiMjUiLCJHRFBSIjoiMSIsImNhdGVnb3J5IjoiXy01MTAwIiwidG90YWxQbGF5dGltZSI6IjAiLCJrbHYiOiI3QkQ0MUNDREQ2OUVBMTkxMjM4RDkzNjRBMjA3RkVGQSIsImdpZCI6ImNhM2JjZDhiLWViMzAtNDA1Yy05NDczLWZkZTI3NTM0M2QyMyIsInRyIjoiNDMyMiIsIm1ldGEiOiJtZXJjaGFudD1hZG1pbiZrZXk9bmFnYXdpYnUiLCJmaGFzaCI6Ii03MTY5MjgwMDQiLCJyaWQiOiIwMjNDRTFGQjA0MkY2NkJEMDUwQzJDMTRDRUUzNDA2QSIsInBsYXRmb3JtSUQiOiI0IiwiZGV2aWNlVmVyc2lvbiI6IjAiLCJjb3VudHJ5IjoiaWQiLCJoYXNoIjoiLTg3MzE1MzA0OCIsIm1hYyI6IjAyOjAwOjAwOjAwOjAwOjAwIiwid2siOiJOT05FMCJ9Jl9zZXNzaW9uPU1UYzFOVEU1TXpFM05nLk4wYzZ4NTdudF9HRnFHNWcyWTZOYmhpcEh6LXBwZVJVUUVWaURxR09KcU0mbWVyY2hhbnRfbmFtZT1PeHlnZW4gSG9zdGluZyZncm93SWQ9JnBhc3N3b3JkPQ==
+platformID|4
+
+[Thu Aug 14 10:39:40 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:51855 connected to server.
+[Thu Aug 14 10:39:43 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:51855 >> tankIDName|
+tankIDPass|
+requestedName|
+f|1
+protocol|216
+game_version|5.25
+cbits|1024
+player_age|25
+GDPR|1
+category|_-5100
+totalPlaytime|0
+klv|7BD41CCDD69EA191238D9364A207FEFA
+gid|ca3bcd8b-eb30-405c-9473-fde275343d23
+tr|4322
+meta|merchant=admin&key=nagawibu
+fhash|-716928004
+rid|023CE1FB042F66BD050C2C14CEE3406A
+platformID|4
+deviceVersion|0
+country|id
+hash|-873153048
+mac|02:00:00:00:00:00
+wk|NONE0
+lmode|0
+user|-256925376
+UUIDToken|MTc1NTE5MzE3Ng.N0c6x57nt_GFqG5g2Y6NbhipHz-ppeRUQEViDqGOJqM
+doorID|Oxygen Hosting
+aat|2
+[Thu Aug 14 10:39:51 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:39049 disconnected from server.
+[Thu Aug 14 10:40:29 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 3 receive from Peer 103.51.205.190:51855 >> action|quit
+[Thu Aug 14 10:40:34 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:57626 connected to server.
+[Thu Aug 14 10:40:37 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:57626 >> protocol|216
+ltoken|X3Rva2VuPXsidGFua0lETmFtZSI6IiIsInRhbmtJRFBhc3MiOiIiLCJyZXF1ZXN0ZWROYW1lIjoiIiwiZiI6IjEiLCJwcm90b2NvbCI6IjIxNiIsImdhbWVfdmVyc2lvbiI6IjUuMjUiLCJjYml0cyI6IjEwMjQiLCJwbGF5ZXJfYWdlIjoiMjUiLCJHRFBSIjoiMSIsImNhdGVnb3J5IjoiXy01MTAwIiwidG90YWxQbGF5dGltZSI6IjAiLCJrbHYiOiI3QkQ0MUNDREQ2OUVBMTkxMjM4RDkzNjRBMjA3RkVGQSIsImdpZCI6ImNhM2JjZDhiLWViMzAtNDA1Yy05NDczLWZkZTI3NTM0M2QyMyIsInRyIjoiNDMyMiIsIm1ldGEiOiJtZXJjaGFudD1hZG1pbiZrZXk9bmFnYXdpYnUiLCJmaGFzaCI6Ii03MTY5MjgwMDQiLCJyaWQiOiIwMjNDRTFGQjA0MkY2NkJEMDUwQzJDMTRDRUUzNDA2QSIsInBsYXRmb3JtSUQiOiI0IiwiZGV2aWNlVmVyc2lvbiI6IjAiLCJjb3VudHJ5IjoiaWQiLCJoYXNoIjoiLTg3MzE1MzA0OCIsIm1hYyI6IjAyOjAwOjAwOjAwOjAwOjAwIiwid2siOiJOT05FMCJ9Jl9zZXNzaW9uPU1UYzFOVEU1TXpJek13Li1VX0hYUVpyWUkzbjJpR19nUnpRZEEtQ1RSLTlUWWhEZ0M1VWtoN3ZJY2smbWVyY2hhbnRfbmFtZT1PeHlnZW4gSG9zdGluZyZncm93SWQ9JnBhc3N3b3JkPQ==
+platformID|4
+
+[Thu Aug 14 10:40:37 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:55055 connected to server.
+[Thu Aug 14 10:40:40 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:55055 >> tankIDName|
+tankIDPass|
+requestedName|
+f|1
+protocol|216
+game_version|5.25
+cbits|1024
+player_age|25
+GDPR|1
+category|_-5100
+totalPlaytime|0
+klv|7BD41CCDD69EA191238D9364A207FEFA
+gid|ca3bcd8b-eb30-405c-9473-fde275343d23
+tr|4322
+meta|merchant=admin&key=nagawibu
+fhash|-716928004
+rid|023CE1FB042F66BD050C2C14CEE3406A
+platformID|4
+deviceVersion|0
+country|id
+hash|-873153048
+mac|02:00:00:00:00:00
+wk|NONE0
+lmode|0
+user|1791517946
+UUIDToken|MTc1NTE5MzIzMw.-U_HXQZrYI3n2iG_gRzQdA-CTR-9TYhDgC5Ukh7vIck
+doorID|Oxygen Hosting
+aat|2
+[Thu Aug 14 10:40:42 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:51855 disconnected from server.
+[Thu Aug 14 10:40:48 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:57626 disconnected from server.
+[Thu Aug 14 10:41:08 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:55055 disconnected from server.
+[Thu Aug 14 12:17:09 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:49030 connected to server.
+[Thu Aug 14 12:17:11 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:49030 >> protocol|216
+ltoken|X3Rva2VuPXsidGFua0lETmFtZSI6IiIsInRhbmtJRFBhc3MiOiIiLCJyZXF1ZXN0ZWROYW1lIjoiIiwiZiI6IjEiLCJwcm90b2NvbCI6IjIxNiIsImdhbWVfdmVyc2lvbiI6IjUuMjUiLCJjYml0cyI6IjEwMjQiLCJwbGF5ZXJfYWdlIjoiMjUiLCJHRFBSIjoiMSIsImNhdGVnb3J5IjoiXy01MTAwIiwidG90YWxQbGF5dGltZSI6IjAiLCJrbHYiOiI3QkQ0MUNDREQ2OUVBMTkxMjM4RDkzNjRBMjA3RkVGQSIsImdpZCI6ImNhM2JjZDhiLWViMzAtNDA1Yy05NDczLWZkZTI3NTM0M2QyMyIsInRyIjoiNDMyMiIsIm1ldGEiOiJtZXJjaGFudD1hZG1pbiZrZXk9bmFnYXdpYnUiLCJmaGFzaCI6Ii03MTY5MjgwMDQiLCJyaWQiOiIwMjNDRTFGQjA0MkY2NkJEMDUwQzJDMTRDRUUzNDA2QSIsInBsYXRmb3JtSUQiOiI0IiwiZGV2aWNlVmVyc2lvbiI6IjAiLCJjb3VudHJ5IjoiaWQiLCJoYXNoIjoiLTg3MzE1MzA0OCIsIm1hYyI6IjAyOjAwOjAwOjAwOjAwOjAwIiwid2siOiJOT05FMCJ9Jl9zZXNzaW9uPU1UYzFOVEU1TXpZeE1nLmRDaEQ4R05PbVhFNzRCV21vUXJOZmJHNG9Ub29JRXBsUzZycXZTeHJHQmcmbWVyY2hhbnRfbmFtZT1PeHlnZW4gSG9zdGluZyZncm93SWQ9SGlsYWwmcGFzc3dvcmQ9ZmVmZWtreXJvMTIz
+platformID|4
+
+[Thu Aug 14 12:17:11 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:45513 connected to server.
+[Thu Aug 14 12:17:13 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:45513 >> tankIDName|Hilal
+tankIDPass|fefekkyro123
+requestedName|
+f|1
+protocol|216
+game_version|5.25
+cbits|1024
+player_age|25
+GDPR|1
+category|_-5100
+totalPlaytime|0
+klv|7BD41CCDD69EA191238D9364A207FEFA
+gid|ca3bcd8b-eb30-405c-9473-fde275343d23
+tr|4322
+meta|merchant=admin&key=nagawibu
+fhash|-716928004
+rid|023CE1FB042F66BD050C2C14CEE3406A
+platformID|4
+deviceVersion|0
+country|id
+hash|-873153048
+mac|02:00:00:00:00:00
+wk|NONE0
+lmode|0
+user|1378063193
+UUIDToken|MTc1NTE5MzYxMg.dChD8GNOmXE74BWmoQrNfbG4oTooIEplS6rqvSxrGBg
+doorID|Oxygen Hosting
+aat|2
+[Thu Aug 14 12:17:27 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:49030 disconnected from server.
+[Thu Aug 14 12:17:46 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:45513 disconnected from server.
+[Thu Aug 14 21:06:37 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:36605 connected to server.
+[Thu Aug 14 21:06:39 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:36605 >> protocol|216
+ltoken|X3Rva2VuPXsidGFua0lETmFtZSI6IiIsInRhbmtJRFBhc3MiOiIiLCJyZXF1ZXN0ZWROYW1lIjoiIiwiZiI6IjEiLCJwcm90b2NvbCI6IjIxNiIsImdhbWVfdmVyc2lvbiI6IjUuMjUiLCJjYml0cyI6IjEwMjQiLCJwbGF5ZXJfYWdlIjoiMTkiLCJHRFBSIjoiMSIsImNhdGVnb3J5IjoiXy01MTAwIiwidG90YWxQbGF5dGltZSI6IjAiLCJrbHYiOiI3QkQ0MUNDREQ2OUVBMTkxMjM4RDkzNjRBMjA3RkVGQSIsImdpZCI6ImNhM2JjZDhiLWViMzAtNDA1Yy05NDczLWZkZTI3NTM0M2QyMyIsInRyIjoiNDMyMiIsIm1ldGEiOiJtZXJjaGFudD1hZG1pbiZrZXk9bmFnYXdpYnUiLCJmaGFzaCI6Ii03MTY5MjgwMDQiLCJyaWQiOiIwMjNDRTFGQjA0MkY2NkJEMDUwQzJDMTRDRUUzNDA2QSIsInBsYXRmb3JtSUQiOiI0IiwiZGV2aWNlVmVyc2lvbiI6IjAiLCJjb3VudHJ5IjoiaWQiLCJoYXNoIjoiLTg3MzE1MzA0OCIsIm1hYyI6IjAyOjAwOjAwOjAwOjAwOjAwIiwid2siOiJOT05FMCJ9Jm5hbWVTZXJ2ZXI9dW5kZWZpbmVkJmdyb3dJZD1PeHlnZW4mcGFzc3dvcmQ9aUhheDExaUhheA==
+platformID|4
+
+[Thu Aug 14 21:06:39 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:56283 connected to server.
+[Thu Aug 14 21:06:41 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:56283 >> tankIDName|Oxygen
+tankIDPass|iHax11iHax
+requestedName|
+f|1
+protocol|216
+game_version|5.25
+cbits|1024
+player_age|19
+GDPR|1
+category|_-5100
+totalPlaytime|0
+klv|7BD41CCDD69EA191238D9364A207FEFA
+gid|ca3bcd8b-eb30-405c-9473-fde275343d23
+tr|4322
+meta|merchant=admin&key=nagawibu
+fhash|-716928004
+rid|023CE1FB042F66BD050C2C14CEE3406A
+platformID|4
+deviceVersion|0
+country|id
+hash|-873153048
+mac|02:00:00:00:00:00
+wk|NONE0
+lmode|0
+user|-497332483
+token|2088007920
+aat|2
+[Thu Aug 14 21:06:55 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:36605 disconnected from server.
+[Thu Aug 14 21:07:00 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:56283 disconnected from server.

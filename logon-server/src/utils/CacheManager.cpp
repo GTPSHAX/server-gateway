@@ -1,8 +1,5 @@
 ﻿#include "CacheManager.h"
 
-#include <algorithm>
-#include <iostream>
-
 // Static member definitions
 std::unordered_map<std::string, std::unique_ptr<CacheManager::CacheEntry>> CacheManager::cache_;
 std::mutex CacheManager::mutex_;

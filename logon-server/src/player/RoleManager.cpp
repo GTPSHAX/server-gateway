@@ -1,7 +1,4 @@
 ﻿#include "RoleManager.h"
-#include <utils/ConsoleInterface.h>
-#include <utils/FileSystem2.h>
-#include <algorithm>
 
 RoleManager::RoleManager() : m_role(PlayerRole::NONE), m_attribute(PlayerAttribute::NONE) {}
 

@@ -6,15 +6,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Tambahkan compile options untuk UTF-8
-add_compile_options(/utf-8 /FS)
+add_compile_options(/utf-8 )
 
 file(GLOB UTILS_SRC
   src/utils/*.cpp
 )
-file(GLOB SERVER_HANDLER_SRC
-  src/server/handler/*.cpp
+file(GLOB SERVER_SRC
+  src/server/*.cpp
+  src/server/**/*.cpp
+)
+file(GLOB PLAYER_SRC
+  src/player/*.cpp
+)
+file(GLOB PACKET_SRC
+  src/packet/*.cpp
 )
 file(GLOB PROTON_SDK_SRC
+  src/SDK/*.cpp
   src/SDK/**/*.cpp
   src/SDK/**/**/*.cpp
 )
@@ -22,12 +30,10 @@ file(GLOB PROTON_SDK_SRC
 # Tambahkan executable
 add_executable(logon-server
   src/main.cpp
-  src/server/ENetServer.cpp
-  src/server/ENetServer_static.cpp
-  src/packet/PacketVariant.cpp
-  src/player/RoleManager.cpp
+  ${SERVER_SRC}
+  ${PACKET_SRC}
+  ${PLAYER_SRC}
   ${UTILS_SRC}
-  ${SERVER_HANDLER_SRC}
   ${PROTON_SDK_SRC}
 )
 
@@ -51,4 +57,6 @@ target_link_libraries(logon-server
   enet
   fmt
   CURL::libcurl
+  ws2_32
+  winmm
 )

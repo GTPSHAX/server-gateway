@@ -2,6 +2,11 @@
 
 #include <BaseApp.h>
 
+#include <string>
+#include <mutex>
+
+#include <nlohmann/json.hpp>
+
 #include "RoleManager.h"
 
 struct PlayerCredentials {

@@ -1,6 +1,9 @@
 #pragma once
 
-#include "BaseApp.h"
+#include <BaseApp.h>
+
+#include <string>
+#include <fmt/format.h>
 
 enum eContentSize {
 	SIZE_SMALL,

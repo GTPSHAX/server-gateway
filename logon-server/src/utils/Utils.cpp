@@ -1,12 +1,26 @@
 #include "Utils.h"
 
-static const std::string base64_chars =
-             "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-             "abcdefghijklmnopqrstuvwxyz"
-             "0123456789+/";
-
 bool Utils::PeerValidation(ENetPeer* peer) {
   return !(!peer || peer == nullptr || !peer->data || peer->data == NULL || peer->state != ENET_PEER_STATE_CONNECTED);
+}
+std::string Utils::param_get_value(const std::string& key, const std::string& data) { 
+  std::string pattern = key + "="; 
+  size_t start = data.find(pattern); 
+
+  if (start == std::string::npos) 
+    return ""; 
+
+  start += pattern.length(); 
+
+  // Special handling for key "password" 
+  if (key == "password") { 
+    return data.substr(start); // everything after "password=" 
+  } 
+
+  size_t end = data.find('&', start); 
+  return (end == std::string::npos)  
+    ? data.substr(start) 
+    : data.substr(start, end - start); 
 }
 std::string Utils::base64_decode(std::string const& encoded_string) {
   std::string decoded_string;

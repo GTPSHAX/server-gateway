@@ -2,6 +2,12 @@
 
 #include <BaseApp.h>
 
+#include <string>
+
+#include <enet/enet.h>
+
+#include <utils/Utils.h>
+
 struct PacketVariant
 {
 private:

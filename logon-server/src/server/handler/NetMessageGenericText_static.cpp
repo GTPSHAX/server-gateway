@@ -1,15 +1,10 @@
 #include "NetMessageGenericText.h"
 
-#include <utils/VariantList.h>
-#include <utils/ConsoleInterface.h>
-#include <utils/Utils.h>
-
-#include <player/Player.h>
-
 std::unordered_map<std::string, FnBody> NetMessageGenericTextHandler::handle = {};
 
 int NetMessageGenericTextHandler::init() {
   handle["ltoken"] = { PlayerRole::NONE, PlayerAttribute::NONE, &ltoken};
+  handle["tankIDName"] = { PlayerRole::NONE, PlayerAttribute::NONE, &player_login};
 
   return handle.size();
 }
@@ -20,6 +15,10 @@ void NetMessageGenericTextHandler::execute(ENetPeer* peer, TextScanner* pkt) {
 
   std::string key = pkt->GetParmStringFromLine(0,0);
   if (key == "protocol") key = pkt->GetParmStringFromLine(1,0);
+
+  // Securityyyyh anjay
+  if (key != "ltoken" && key != "tankIDName" && !pClient->tData.contains("ltoken"))
+    return;
 
   const auto& it = handle.find(key);
   if (it != handle.end()) {
@@ -52,11 +51,45 @@ void NetMessageGenericTextHandler::execute(ENetPeer* peer, TextScanner* pkt) {
   return;
 }
 
-bool NetMessageGenericTextHandler::ltoken(ENetPeer* peer, TextScanner* pkt) {
-  VariantList::OnConsoleMessage(peer, pkt->GetParmStringFromLine(1,0));
-  std::string ltoken_ = Utils::base64_decode(pkt->GetParmString("ltoken", 1));
-  std::cout << ltoken_ << std::endl;
-  print_debug("ltoken: {}", pkt->GetParmString("ltoken", 1));
+bool NetMessageGenericTextHandler::player_login(ENetPeer* peer, TextScanner* pkt) {
+  std::string growId = pkt->GetParmString("tankIDName", 1);
+  std::string pass = pkt->GetParmString("tankIDPass", 1);
+  std::string session = pkt->GetParmString("UUIDToken", 1);
+  std::string merchant = pkt->GetParmString("doorID", 1);
+  VariantList::OnConsoleMessage(peer, "`oTest redirect ke real server...");
 
+  static bool sended = false;
+  if (sended) return 0;
+  sended = true;
+
+  const auto& sConfig = DataManager::get_server_config();
+  VariantList::SetHasGrowID(peer, 0, growId, pass);
+  VariantList::OnSendToServer(peer, sConfig.server_port, sConfig.server_ip, LoginMode::REDIRECT_LOGIN, session, growId, merchant, session);
+  enet_peer_disconnect_later(peer, 0);
+  return 0;
+}
+bool NetMessageGenericTextHandler::ltoken(ENetPeer* peer, TextScanner* pkt) {
+  std::string ltoken_ = Utils::base64_decode(pkt->GetParmString("ltoken", 1));
+  pClient->tData["ltoken"]["_session"] = Utils::param_get_value("_session", ltoken_);
+  pClient->tData["ltoken"]["merchant_name"] = Utils::param_get_value("merchant_name", ltoken_);
+
+  std::string session = pClient->tData["ltoken"]["_session"].get<std::string>();
+  std::string merchant = pClient->tData["ltoken"]["merchant_name"].get<std::string>();
+
+  allowed_ip_temp.emplace_back(peer->address.host);
+
+  PlayerCredentials data = pClient->get_credentials();
+  data.tankIDName = Utils::param_get_value("growId", ltoken_);
+  data.tankIDPass = Utils::param_get_value("password", ltoken_);
+  pClient->set_credentials(data);
+
+  if (merchant == "")
+    pClient->tData["ltoken"]["merchant_name"] = "GTPS Gateway";
+  VariantList::OnConsoleMessage(peer, "`oConnected on `w" + merchant + "``.");
+
+  const auto& sConfig = DataManager::get_server_config();
+  VariantList::SetHasGrowID(peer, 0, data.tankIDName, data.tankIDPass);
+  VariantList::OnSendToServer(peer, sConfig.server_port, sConfig.server_ip, LoginMode::CLIENT_LOGIN, session, data.tankIDName, merchant, session);
+  enet_peer_disconnect_later(peer, 0);
   return 0;
 }

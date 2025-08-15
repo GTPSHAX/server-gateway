@@ -1,6 +1,18 @@
 ﻿#pragma once
 
-#include "BaseApp.h"
+#include <BaseApp.h>
+
+#include <string>
+#include <functional>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <thread>
+
+#include <fmt/format.h>
+#include <fmt/color.h>
+
+#include "FileSystem2.h"
 
 // Macro definitions for easy logging
 // Using a helper macro for file, line, function info to avoid repetition
@@ -19,44 +31,43 @@
 #define print_debug(...) ((void)0)
 #endif
 
+
+// Color constants - Mapped to fmt::color for direct use
+// Using explicit underlying type (int) for safety and direct casting
+enum class Color : int {
+    BLACK = 0,
+    RED = 1,
+    GREEN = 2,
+    YELLOW = 3,
+    BLUE = 4,
+    MAGENTA = 5,
+    CYAN = 6,
+    WHITE = 7,
+    BRIGHT_BLACK = 8, // fmt::color::gray
+    BRIGHT_RED = 9,   // Mapped to light_red, which exists in fmt
+    BRIGHT_GREEN = 10, // fmt::color::light_green
+    BRIGHT_YELLOW = 11, // fmt::color::light_golden_rod_yellow
+    BRIGHT_BLUE = 12,  // fmt::color::light_blue
+    BRIGHT_MAGENTA = 13, // fmt::color::magenta (using base magenta as bright_magenta is not direct)
+    BRIGHT_CYAN = 14,  // Mapped to light_cyan, which exists in fmt
+    BRIGHT_WHITE = 15 // fmt::color::white (using base white as bright_white is not direct)
+};
+struct BoxChars {
+    static constexpr const char* TOP_LEFT = "+";
+    static constexpr const char* TOP_RIGHT = "+";
+    static constexpr const char* BOTTOM_LEFT = "+";
+    static constexpr const char* BOTTOM_RIGHT = "+";
+    static constexpr const char* HORIZONTAL = "-";
+    static constexpr const char* VERTICAL = "|";
+    static constexpr const char* CROSS = "+";
+    static constexpr const char* T_DOWN = "+";
+    static constexpr const char* T_UP = "+";
+    static constexpr const char* T_RIGHT = "+";
+    static constexpr const char* T_LEFT = "+";
+};
+
 class ConsoleInterface {
 public:
-    // Color constants - Mapped to fmt::color for direct use
-    // Using explicit underlying type (int) for safety and direct casting
-    enum class Color : int {
-        BLACK = 0,
-        RED = 1,
-        GREEN = 2,
-        YELLOW = 3,
-        BLUE = 4,
-        MAGENTA = 5,
-        CYAN = 6,
-        WHITE = 7,
-        BRIGHT_BLACK = 8, // fmt::color::gray
-        BRIGHT_RED = 9,   // Mapped to light_red, which exists in fmt
-        BRIGHT_GREEN = 10, // fmt::color::light_green
-        BRIGHT_YELLOW = 11, // fmt::color::light_golden_rod_yellow
-        BRIGHT_BLUE = 12,  // fmt::color::light_blue
-        BRIGHT_MAGENTA = 13, // fmt::color::magenta (using base magenta as bright_magenta is not direct)
-        BRIGHT_CYAN = 14,  // Mapped to light_cyan, which exists in fmt
-        BRIGHT_WHITE = 15 // fmt::color::white (using base white as bright_white is not direct)
-    };
-
-
-    struct BoxChars {
-        static constexpr const char* TOP_LEFT = "+";
-        static constexpr const char* TOP_RIGHT = "+";
-        static constexpr const char* BOTTOM_LEFT = "+";
-        static constexpr const char* BOTTOM_RIGHT = "+";
-        static constexpr const char* HORIZONTAL = "-";
-        static constexpr const char* VERTICAL = "|";
-        static constexpr const char* CROSS = "+";
-        static constexpr const char* T_DOWN = "+";
-        static constexpr const char* T_UP = "+";
-        static constexpr const char* T_RIGHT = "+";
-        static constexpr const char* T_LEFT = "+";
-    };
-
     // Initialization and cleanup
     static void initialize();
     static void cleanup();

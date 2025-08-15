@@ -2,6 +2,12 @@
 
 #include <BaseApp.h>
 
+#include <string>
+#include <filesystem>
+#include <fstream>
+#include <nlohmann/json.hpp>
+#include <unordered_map>
+
 /**
  * @file FileSystem2.h
  * @brief A cross-platform utility namespace for file operations, including JSON and .env file support.
@@ -62,4 +68,4 @@ namespace FileSystem2 {
 	 */
 	void writeEnv(const std::string& filePath, const std::unordered_map<std::string, std::string>& envData, bool append = false);
 
-} // namespace FileSystem2
+}

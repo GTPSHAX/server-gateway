@@ -1,7 +1,5 @@
 ﻿#include "ConsoleInterface.h"
 
-#include "FileSystem2.h"
-
 // Static member initialization
 bool ConsoleInterface::m_initialized = false;
 bool ConsoleInterface::m_ansi_supported = false;
@@ -469,29 +467,29 @@ void ConsoleInterface::print_box(const std::string& content, int width, Color bo
     if (m_ansi_supported) {
         fmt::color fmt_border_color = to_fmt_color(border_color);
 
-        // Top border - Added ConsoleInterface::BoxChars:: scope
+        // Top border - Added   BoxChars:: scope
         fmt::print("{}{}{}{}\n",
-            fmt::styled(ConsoleInterface::BoxChars::TOP_LEFT, fmt::fg(fmt_border_color)),
-            fmt::styled(std::string(inner_width, *ConsoleInterface::BoxChars::HORIZONTAL), fmt::fg(fmt_border_color)),
-            fmt::styled(ConsoleInterface::BoxChars::TOP_RIGHT, fmt::fg(fmt_border_color)),
+            fmt::styled(BoxChars::TOP_LEFT, fmt::fg(fmt_border_color)),
+            fmt::styled(std::string(inner_width, *BoxChars::HORIZONTAL), fmt::fg(fmt_border_color)),
+            fmt::styled(BoxChars::TOP_RIGHT, fmt::fg(fmt_border_color)),
             fmt::styled("", fmt::fg(fmt::color::white)) // Reset after border
         );
 
-        // Content - Added ConsoleInterface::BoxChars:: scope
+        // Content - Added BoxChars:: scope
         for (const auto& content_line : lines) {
             fmt::print("{} {:<{}} {}\n",
-                fmt::styled(ConsoleInterface::BoxChars::VERTICAL, fmt::fg(fmt_border_color)),
+                fmt::styled(BoxChars::VERTICAL, fmt::fg(fmt_border_color)),
                 content_line,
                 width - 4, // Inner content width (total - borders - padding)
-                fmt::styled(ConsoleInterface::BoxChars::VERTICAL, fmt::fg(fmt_border_color))
+                fmt::styled(BoxChars::VERTICAL, fmt::fg(fmt_border_color))
             );
         }
 
-        // Bottom border - Added ConsoleInterface::BoxChars:: scope and consistent color
+        // Bottom border - Added BoxChars:: scope and consistent color
         fmt::print("{}{}{}{}\n",
-            fmt::styled(ConsoleInterface::BoxChars::BOTTOM_LEFT, fmt::fg(fmt_border_color)),
-            fmt::styled(std::string(inner_width, *ConsoleInterface::BoxChars::HORIZONTAL), fmt::fg(fmt_border_color)),
-            fmt::styled(ConsoleInterface::BoxChars::BOTTOM_RIGHT, fmt::fg(fmt_border_color)),
+            fmt::styled(BoxChars::BOTTOM_LEFT, fmt::fg(fmt_border_color)),
+            fmt::styled(std::string(inner_width, *BoxChars::HORIZONTAL), fmt::fg(fmt_border_color)),
+            fmt::styled(BoxChars::BOTTOM_RIGHT, fmt::fg(fmt_border_color)),
             fmt::styled("", fmt::fg(fmt::color::white)) // Reset after border
         );
     }
@@ -513,9 +511,9 @@ void ConsoleInterface::print_separator(int width, Color color) {
     width = max(5, width); // Minimum width
 
     if (m_ansi_supported) {
-        // Added ConsoleInterface::BoxChars:: scope and dereference for single char
+        // Added BoxChars:: scope and dereference for single char
         fmt::print("{}\n",
-            fmt::styled(std::string(width, *ConsoleInterface::BoxChars::HORIZONTAL), fmt::fg(to_fmt_color(color)))
+            fmt::styled(std::string(width, *BoxChars::HORIZONTAL), fmt::fg(to_fmt_color(color)))
         );
     }
     else {
@@ -544,28 +542,28 @@ void ConsoleInterface::print_header(const std::string& title, Color color) {
         fmt::color fmt_color = to_fmt_color(color);
         int inner_width = width - 2;
 
-        // Added ConsoleInterface::BoxChars:: scope and dereference for single char
+        // Added BoxChars:: scope and dereference for single char
         fmt::print("{}{}{}{}\n",
-            fmt::styled(ConsoleInterface::BoxChars::TOP_LEFT, fmt::fg(fmt_color)),
-            fmt::styled(std::string(inner_width, *ConsoleInterface::BoxChars::HORIZONTAL), fmt::fg(fmt_color)),
-            fmt::styled(ConsoleInterface::BoxChars::TOP_RIGHT, fmt::fg(fmt_color)),
+            fmt::styled(BoxChars::TOP_LEFT, fmt::fg(fmt_color)),
+            fmt::styled(std::string(inner_width, *BoxChars::HORIZONTAL), fmt::fg(fmt_color)),
+            fmt::styled(BoxChars::TOP_RIGHT, fmt::fg(fmt_color)),
             fmt::styled("", fmt::fg(fmt::color::white))
         );
 
-        // Added ConsoleInterface::BoxChars:: scope
+        // Added BoxChars:: scope
         fmt::print("{} {}{}{} {}\n",
-            fmt::styled(ConsoleInterface::BoxChars::VERTICAL, fmt::fg(fmt_color)),
+            fmt::styled(BoxChars::VERTICAL, fmt::fg(fmt_color)),
             left_padding_str,
             fmt::styled(title, fmt::fg(fmt_color) | fmt::emphasis::bold),
             right_padding_str,
-            fmt::styled(ConsoleInterface::BoxChars::VERTICAL, fmt::fg(fmt_color))
+            fmt::styled(BoxChars::VERTICAL, fmt::fg(fmt_color))
         );
 
-        // Added ConsoleInterface::BoxChars:: scope and dereference for single char, consistent color
+        // Added BoxChars:: scope and dereference for single char, consistent color
         fmt::print("{}{}{}{}\n",
-            fmt::styled(ConsoleInterface::BoxChars::BOTTOM_LEFT, fmt::fg(fmt_color)),
-            fmt::styled(std::string(inner_width, *ConsoleInterface::BoxChars::HORIZONTAL), fmt::fg(fmt_color)),
-            fmt::styled(ConsoleInterface::BoxChars::BOTTOM_RIGHT, fmt::fg(fmt_color)),
+            fmt::styled(BoxChars::BOTTOM_LEFT, fmt::fg(fmt_color)),
+            fmt::styled(std::string(inner_width, *BoxChars::HORIZONTAL), fmt::fg(fmt_color)),
+            fmt::styled(BoxChars::BOTTOM_RIGHT, fmt::fg(fmt_color)),
             fmt::styled("", fmt::fg(fmt::color::white)) // Reset after border
         );
     }
@@ -662,6 +660,7 @@ void ConsoleInterface::show_loading(const std::string& message, std::function<vo
 
                 spinner_idx = spinner_idx >= spinner.size() - 1 ? 0 : spinner_idx + 1;
             }
+            catch (const fmt::format_error& e) {}
             catch (...) {}
 
             std::this_thread::sleep_for(std::chrono::milliseconds(100));

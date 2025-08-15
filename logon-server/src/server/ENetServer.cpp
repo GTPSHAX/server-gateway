@@ -1,16 +1,5 @@
 #include "ENetServer.h"
 
-#include <SDK/Proton/TextScanner.h>
-
-#include <utils/ConsoleInterface.h>
-#include <utils/Curl.h>
-#include <utils/VariantList.h>
-#include <utils/Utils.h>
-
-#include <player/Player.h>
-
-#include "handler/NetMessageGenericText.h"
-
 ENetServer::ENetServer(const ENetAddress& address): m_address(address) {
   std::string host = get_host_ip(&m_address);
 
@@ -73,16 +62,14 @@ std::thread* ENetServer::service() {
             data.IPv4 = pIP;
             pClient->set_credentials(data);
             
-            enet_peer_timeout(peer, 0, 60000, 60000 * 2); 
-            enet_peer_ping_interval(peer, 2);
+            enet_peer_timeout(peer, 5000, 3000, 10000);
 
-            VariantList::OnConsoleMessage(peer, "`oConnected on `0Server Gateway``.");
             VariantList::OnConsoleMessage(peer, "`oValidating request...");
             enet_host_flush(m_server);
             
             Curl curl;
             curl.setUrl("http://localhost:8080/check-ip/" + pIP);
-            curl.setTimeout(5);
+            curl.setTimeout((std::find(allowed_ip_temp.begin(), allowed_ip_temp.end(), peer->address.host) != allowed_ip_temp.end() ? 2 : 5));
             curl.setSSLVerification(false);
 
             if (curl.perform()) {
@@ -123,10 +110,19 @@ std::thread* ENetServer::service() {
                 print_warning("Unhandled net packet type: {} sended by peer {}:{}", packet_type, pIP, peer->address.host);
               }
             }
+
+            enet_packet_destroy(event.packet);
             break;
           }
           case ENET_EVENT_TYPE_DISCONNECT: {
-            print_debug("[{}:{}] Player with {}:{} disconnected from server.", sIP, m_address.port, pIP, peer->address.port);
+            print_debug("[{}:{}] Player with {}:{} disconnected from server.", 
+                        sIP, m_address.port, pIP, peer->address.port);
+            
+            // Cleanup peer data
+            if (peer->data) {
+              delete peer->data;
+              peer->data = NULL;
+            }
             break;
           }
           default: {
