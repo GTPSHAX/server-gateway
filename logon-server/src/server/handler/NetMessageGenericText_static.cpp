@@ -52,13 +52,20 @@ void NetMessageGenericTextHandler::execute(ENetPeer* peer, TextScanner* pkt) {
 }
 
 bool NetMessageGenericTextHandler::player_login(ENetPeer* peer, TextScanner* pkt) {
-  print_debug("masuk");
+  PlayerCredentials data = pClient->get_credentials();
+  data.tankIDName = pkt->GetParmString("tankIDName", 1);
+  data.tankIDPass = pkt->GetParmString("tankIDPass", 1);
+  pClient->set_credentials(data);
   pClient->tData["ltoken"]["merchant_name"] = pkt->GetParmString("doorID", 1);
-  RoleManager pRole = pClient->get_roles();
-  pRole.add_role(PlayerRole::ADMIN);
-  pClient->set_roles(pRole);
 
-  VariantList::OnRequestWorldSelectMenu(peer, Utils::generate_world_offers(pClient));
+  try {
+    std::string ctx = Utils::generate_world_offers(pClient);
+    VariantList::OnRequestWorldSelectMenu(peer, ctx);
+  }
+  catch (const std::runtime_error& e) {
+    VariantList::OnConsoleMessage(peer, fmt::format("`4Error`w: {}", e.what()));
+    enet_peer_disconnect_later(peer, 0);
+  }
 
   // std::string growId = pkt->GetParmString("tankIDName", 1);
   // std::string pass = pkt->GetParmString("tankIDPass", 1);

@@ -1,15 +1,44 @@
 #include "Utils.h"
 
 #include <SDK/Builders/WorldOffersBuilder.h>
-#include <utils/ColorConverter.h>
+#include "ColorConverter.h"
+#include "FileSystem2.h"
+
 
 bool Utils::PeerValidation(ENetPeer* peer) {
   return !(!peer || peer == nullptr || !peer->data || peer->data == NULL || peer->state != ENET_PEER_STATE_CONNECTED);
 }
 std::string Utils::generate_world_offers(Player* player) {
-  RoleManager pRole = player->get_roles();
-  WorldOffersMenu ctx;
   uint32_t default_color = ColorConverter::toBGRA(214,171,94,255);
+  std::string merchant = player->tData["ltoken"]["merchant_name"].get<std::string>();
+  std::string base_path = "../../../database/";
+  std::string additional_msg = "";
+  RoleManager pRole = player->get_roles();
+  PlayerCredentials pCredentials = player->get_credentials();
+  WorldOffersMenu ctx;
+
+  print_debug("GrowID: {}\nPass: {}", pCredentials.tankIDName, pCredentials.tankIDPass);
+
+  // Fetch merchant data
+  if (!std::filesystem::exists(base_path + "merchants/" + merchant + ".json")) 
+    throw std::runtime_error(fmt::format("This merchant ({}) are not affiliated with us!", merchant));
+
+  nlohmann::json mData = FileSystem2::readJson(base_path + "merchants/" + merchant + ".json");
+
+  if (pCredentials.tankIDName == mData["tankIDName"].get<std::string>() && pCredentials.tankIDPass == mData["tankIDPass"].get<std::string>()) {
+    // Set role
+    std::string tRole = mData["role"].get<std::string>();
+    if (tRole == "admin")
+      pRole.add_role(PlayerRole::ADMIN);
+    else if (tRole == "merchant")
+      pRole.add_role(PlayerRole::MERCHANT);
+    player->set_roles(pRole);
+
+    // Kasih notif buat beli koin
+    if (mData["coin"].get<int>() < 1) {
+      additional_msg = "`9Warning`w: Your total coins are now `o0`w, don't forget to top up in `5Dashboard -> My profile -> Top up coins`w. )";
+    }
+  }
 
   // testing only
   nlohmann::json tData = (player->tData.contains("OnRequestWorldSelectMenu") 
@@ -33,7 +62,7 @@ std::string Utils::generate_world_offers(Player* player) {
   }
   
   // Build world offers
-  ctx.SetupSimpleMenu()->AddHeading("Enter the `#server name `0in the column above `4^`0 (");
+  ctx.SetupSimpleMenu()->AddHeading("Enter the `#server name `0in the column above `4^`0 (")->AddHeading(additional_msg);
   if (pRole.has_role(PlayerRole::ADMIN) || pRole.has_role(PlayerRole::MERCHANT)) {
     ctx.AddHeading("Dashboard<ROW2>");
 

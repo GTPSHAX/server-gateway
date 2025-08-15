@@ -1,27 +1,26 @@
-[Fri Aug 15 13:10:55 2025] ENetServer.cpp:14:ENetServer::ENetServer | New ENetServer created 0.0.0.0:17090
-[Fri Aug 15 13:11:05 2025] ENetServer.cpp:14:ENetServer::ENetServer | New ENetServer created 0.0.0.0:17090
-[Fri Aug 15 13:11:10 2025] ENetServer.cpp:14:ENetServer::ENetServer | New ENetServer created 0.0.0.0:17090
-[Fri Aug 15 13:11:26 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:53136 connected to server.
-[Fri Aug 15 13:11:31 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:53136 >> protocol|216
-ltoken|X3Rva2VuPXsidGFua0lETmFtZSI6IiIsInRhbmtJRFBhc3MiOiIiLCJyZXF1ZXN0ZWROYW1lIjoiIiwiZiI6IjEiLCJwcm90b2NvbCI6IjIxNiIsImdhbWVfdmVyc2lvbiI6IjUuMjUiLCJjYml0cyI6IjEwMjQiLCJwbGF5ZXJfYWdlIjoiMTkiLCJHRFBSIjoiMSIsImNhdGVnb3J5IjoiXy01MTAwIiwidG90YWxQbGF5dGltZSI6IjAiLCJrbHYiOiI3QkQ0MUNDREQ2OUVBMTkxMjM4RDkzNjRBMjA3RkVGQSIsImdpZCI6ImNhM2JjZDhiLWViMzAtNDA1Yy05NDczLWZkZTI3NTM0M2QyMyIsInRyIjoiNDMyMiIsIm1ldGEiOiJtZXJjaGFudD1hZG1pbiZrZXk9bmFnYXdpYnUiLCJmaGFzaCI6Ii03MTY5MjgwMDQiLCJyaWQiOiIwMjNDRTFGQjA0MkY2NkJEMDUwQzJDMTRDRUUzNDA2QSIsInBsYXRmb3JtSUQiOiI0IiwiZGV2aWNlVmVyc2lvbiI6IjAiLCJjb3VudHJ5IjoiaWQiLCJoYXNoIjoiLTg3MzE1MzA0OCIsIm1hYyI6IjAyOjAwOjAwOjAwOjAwOjAwIiwid2siOiJOT05FMCJ9Jm5hbWVTZXJ2ZXI9dW5kZWZpbmVkJmdyb3dJZD1PeHlnZW4mcGFzc3dvcmQ9aUhheDExaUhheA==
+[Fri Aug 15 14:55:46 2025] ENetServer.cpp:14:ENetServer::ENetServer | New ENetServer created 0.0.0.0:17090
+[Fri Aug 15 14:55:55 2025] ENetServer.cpp:14:ENetServer::ENetServer | New ENetServer created 0.0.0.0:17090
+[Fri Aug 15 14:56:21 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:53848 connected to server.
+[Fri Aug 15 14:56:27 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:53848 >> protocol|216
+ltoken|X3Rva2VuPXsidGFua0lETmFtZSI6IiIsInRhbmtJRFBhc3MiOiIiLCJyZXF1ZXN0ZWROYW1lIjoiIiwiZiI6IjEiLCJwcm90b2NvbCI6IjIxNiIsImdhbWVfdmVyc2lvbiI6IjUuMjUiLCJjYml0cyI6IjEwNDAiLCJwbGF5ZXJfYWdlIjoiMSIsIkdEUFIiOiIyIiwiY2F0ZWdvcnkiOiJwYWdlXzEiLCJ0b3RhbFBsYXl0aW1lIjoiMCIsImtsdiI6IjdCRDQxQ0NERDY5RUExOTEyMzhEOTM2NEEyMDdGRUZBIiwiZ2lkIjoiY2EzYmNkOGItZWIzMC00MDVjLTk0NzMtZmRlMjc1MzQzZDIzIiwidHIiOiI0MzIyIiwibWV0YSI6Im1lcmNoYW50PU94eWdlbitIb3N0aW5nJmtleT1uYWdhd2lidSIsImZoYXNoIjoiLTcxNjkyODAwNCIsInJpZCI6IjAyM0NFMUZCMDQyRjY2QkQwNTBDMkMxNENFRTM0MDZBIiwicGxhdGZvcm1JRCI6IjQiLCJkZXZpY2VWZXJzaW9uIjoiMCIsImNvdW50cnkiOiJpZCIsImhhc2giOiItODczMTUzMDQ4IiwibWFjIjoiMDI6MDA6MDA6MDA6MDA6MDAiLCJ3ayI6Ik5PTkUwIn0mX3Nlc3Npb249TVRjMU5USTVNakkxT1EuMjlWWXJYRXAzTXYzdXB5enAtUkdLaWw3czBZZ2VPeldzb2FPMVVXX0RrbyZtZXJjaGFudF9uYW1lPU94eWdlbiBIb3N0aW5nJmdyb3dJZD1PeHlnZW4mcGFzc3dvcmQ9aUhheDExaUhheA==
 platformID|4
 
-[Fri Aug 15 13:11:31 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:52709 connected to server.
-[Fri Aug 15 13:11:33 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:52709 >> tankIDName|Oxygen
+[Fri Aug 15 14:56:27 2025] ENetServer.cpp:58:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Peer with 103.51.205.190:40602 connected to server.
+[Fri Aug 15 14:56:29 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 2 receive from Peer 103.51.205.190:40602 >> tankIDName|Oxygen
 tankIDPass|iHax11iHax
 requestedName|
 f|1
 protocol|216
 game_version|5.25
 cbits|1024
-player_age|19
-GDPR|1
+player_age|1
+GDPR|2
 category|page_1
 totalPlaytime|0
 klv|7BD41CCDD69EA191238D9364A207FEFA
 gid|ca3bcd8b-eb30-405c-9473-fde275343d23
 tr|4322
-meta|merchant=admin&key=nagawibu
+meta|merchant=Oxygen Hosting&key=nagawibu
 fhash|-716928004
 rid|023CE1FB042F66BD050C2C14CEE3406A
 platformID|4
@@ -31,13 +30,11 @@ hash|-873153048
 mac|02:00:00:00:00:00
 wk|NONE0
 lmode|0
-user|1908282326
-doorID|GTPS Gateway
+user|-1860527350
+UUIDToken|MTc1NTI5MjI1OQ.29VYrXEp3Mv3upyzp-RGKil7s0YgeOzWsoaO1UW_Dko
+doorID|Oxygen Hosting
 aat|2
-[Fri Aug 15 13:11:33 2025] NetMessageGenericText_static.cpp:55:NetMessageGenericTextHandler::player_login | masuk
-[Fri Aug 15 13:11:33 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 3 receive from Peer 103.51.205.190:52709 >> action|quit_to_exit
-[Fri Aug 15 13:11:46 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:53136 disconnected from server.
-[Fri Aug 15 13:11:52 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 3 receive from Peer 103.51.205.190:52709 >> action|world_button
-name|page_1
-
-[Fri Aug 15 13:12:22 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:52709 disconnected from server.
+[Fri Aug 15 14:56:29 2025] Utils.cpp:20:Utils::generate_world_offers | GrowID: Oxygen
+Pass: iHax11iHax
+[Fri Aug 15 14:56:29 2025] ENetServer.cpp:102:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Packet 3 receive from Peer 103.51.205.190:40602 >> action|quit_to_exit
+[Fri Aug 15 14:56:45 2025] ENetServer.cpp:119:ENetServer::service::<lambda_1>::operator () | [0.0.0.0:17090] Player with 103.51.205.190:53848 disconnected from server.

@@ -8,9 +8,8 @@
       "program": "${workspaceFolder}/bin/Debug/logon-server.exe",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}/bin/Debug",
-      "environment": [],
-      "console": "externalTerminal"
+      "cwd": "${workspaceFolder}/bin/Debug/",
+      "environment": []
     },
     {
       "name": "Debug logon-server (Release)",
@@ -19,9 +18,8 @@
       "program": "${workspaceFolder}/bin/Release/logon-server.exe",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}/bin/Release",
-      "environment": [],
-      "console": "externalTerminal"
+      "cwd": "${workspaceFolder}/bin/Release/",
+      "environment": []
     }
   ]
 }
