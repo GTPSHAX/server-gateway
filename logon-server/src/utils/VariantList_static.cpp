@@ -14,3 +14,7 @@ void VariantList::OnSendToServer(ENetPeer* peer, const int& port, const std::str
   PacketVariant pkt;
   pkt.Insert("OnSendToServer")->Insert(port)->Insert(session)->Insert(peer->connectID)->Insert(host + "|" + doorID + "|" + auth_data)->Insert(static_cast<int>(mode))->Insert(display_name)->CreatePacket(peer);
 }
+void VariantList::OnRequestWorldSelectMenu(ENetPeer* peer, const std::string& ctx) {
+  PacketVariant pkt;
+  pkt.Insert("OnRequestWorldSelectMenu")->Insert(ctx)->CreatePacket(peer);
+}

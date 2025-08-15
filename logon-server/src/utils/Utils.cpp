@@ -1,7 +1,58 @@
 #include "Utils.h"
 
+#include <SDK/Builders/WorldOffersBuilder.h>
+#include <utils/ColorConverter.h>
+
 bool Utils::PeerValidation(ENetPeer* peer) {
   return !(!peer || peer == nullptr || !peer->data || peer->data == NULL || peer->state != ENET_PEER_STATE_CONNECTED);
+}
+std::string Utils::generate_world_offers(Player* player) {
+  RoleManager pRole = player->get_roles();
+  WorldOffersMenu ctx;
+  uint32_t default_color = ColorConverter::toBGRA(214,171,94,255);
+
+  // testing only
+  nlohmann::json tData = (player->tData.contains("OnRequestWorldSelectMenu") 
+                          ? player->tData["OnRequestWorldSelectMenu"] 
+                          : nlohmann::json());
+
+  int tPage = 0;
+  int req_page = (tData.contains("page") ? tData["page"].get<int>() : 0);
+  int max_servers_page = 10;
+  std::map<int, std::vector<std::string>> pagination = {};
+  std::vector<std::string> servers = { "Gemtopia", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT", "MafiaPS", "CreativePS", "RGT" };
+
+  // Susun pagination
+  for (int i = 0; i < servers.size(); i++) {
+    if (i >= max_servers_page) {
+      max_servers_page *= 2;
+      tPage++;
+    }
+    
+    pagination[tPage].push_back(servers[i]);
+  }
+  
+  // Build world offers
+  ctx.SetupSimpleMenu()->AddHeading("Enter the `#server name `0in the column above `4^`0 (");
+  if (pRole.has_role(PlayerRole::ADMIN) || pRole.has_role(PlayerRole::MERCHANT)) {
+    ctx.AddHeading("Dashboard<ROW2>");
+
+    if (pRole.has_role(PlayerRole::ADMIN))
+      ctx.AddButton("Control Panel", "control_panel", 0.5, default_color);
+    ctx.AddButton("My Profile", "my_profile", 0.5, default_color)->AddButton("Add new server", "add_new_server", 0.5, default_color);
+  }
+
+  ctx.AddHeading("Available servers<CR>");
+  for (const auto& a : pagination[req_page])
+    ctx.AddButton(a, "enter_" + a, 0.5, default_color);
+
+  ctx.AddHeading("`oPage `1" + std::to_string(req_page + 1) + " ``of `1" + std::to_string(pagination.size()) + "<CR>");
+  if (req_page < pagination.size())
+    ctx.AddButton("Next page", "page_" + std::to_string(req_page + 1), 0.5, default_color);
+  if (req_page > 0)
+    ctx.AddButton("Previous page", "page_" + std::to_string(req_page - 1), 0.5, default_color);
+
+  return ctx.Build();
 }
 std::string Utils::param_get_value(const std::string& key, const std::string& data) { 
   std::string pattern = key + "="; 

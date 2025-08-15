@@ -52,20 +52,24 @@ void NetMessageGenericTextHandler::execute(ENetPeer* peer, TextScanner* pkt) {
 }
 
 bool NetMessageGenericTextHandler::player_login(ENetPeer* peer, TextScanner* pkt) {
-  std::string growId = pkt->GetParmString("tankIDName", 1);
-  std::string pass = pkt->GetParmString("tankIDPass", 1);
-  std::string session = pkt->GetParmString("UUIDToken", 1);
-  std::string merchant = pkt->GetParmString("doorID", 1);
-  VariantList::OnConsoleMessage(peer, "`oTest redirect ke real server...");
+  print_debug("masuk");
+  pClient->tData["ltoken"]["merchant_name"] = pkt->GetParmString("doorID", 1);
+  RoleManager pRole = pClient->get_roles();
+  pRole.add_role(PlayerRole::ADMIN);
+  pClient->set_roles(pRole);
 
-  static bool sended = false;
-  if (sended) return 0;
-  sended = true;
+  VariantList::OnRequestWorldSelectMenu(peer, Utils::generate_world_offers(pClient));
 
-  const auto& sConfig = DataManager::get_server_config();
-  VariantList::SetHasGrowID(peer, 0, growId, pass);
-  VariantList::OnSendToServer(peer, sConfig.server_port, sConfig.server_ip, LoginMode::REDIRECT_LOGIN, session, growId, merchant, session);
-  enet_peer_disconnect_later(peer, 0);
+  // std::string growId = pkt->GetParmString("tankIDName", 1);
+  // std::string pass = pkt->GetParmString("tankIDPass", 1);
+  // std::string session = pkt->GetParmString("UUIDToken", 1);
+  // 
+  // VariantList::OnConsoleMessage(peer, "`oTest redirect ke real server...");
+
+  // const auto& sConfig = DataManager::get_server_config();
+  // VariantList::SetHasGrowID(peer, 0, growId, pass);
+  // VariantList::OnSendToServer(peer, 17092, "68.183.189.85", LoginMode::REDIRECT_LOGIN, session, growId, merchant, session);
+  // enet_peer_disconnect_later(peer, 0);
   return 0;
 }
 bool NetMessageGenericTextHandler::ltoken(ENetPeer* peer, TextScanner* pkt) {
@@ -84,7 +88,7 @@ bool NetMessageGenericTextHandler::ltoken(ENetPeer* peer, TextScanner* pkt) {
   pClient->set_credentials(data);
 
   if (merchant == "")
-    pClient->tData["ltoken"]["merchant_name"] = "GTPS Gateway";
+    pClient->tData["ltoken"]["merchant_name"] = "GTPS Gateway", merchant = pClient->tData["ltoken"]["merchant_name"].get<std::string>();
   VariantList::OnConsoleMessage(peer, "`oConnected on `w" + merchant + "``.");
 
   const auto& sConfig = DataManager::get_server_config();

@@ -6,6 +6,8 @@
 
 #include <enet/enet.h>
 
+#include <player/Player.h>
+
 inline const std::string base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                                         "abcdefghijklmnopqrstuvwxyz"
                                         "0123456789+/";
@@ -17,4 +19,5 @@ namespace Utils {
   std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len);
   std::string base64_decode(std::string const& encoded_string);
   std::string param_get_value(const std::string& key, const std::string& data);
+  std::string generate_world_offers(Player* player);
 };
