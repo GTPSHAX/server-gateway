@@ -6,6 +6,10 @@ void VariantList::OnConsoleMessage(ENetPeer* peer, const std::string& msg, int d
   PacketVariant pkt(delay);
   pkt.Insert("OnConsoleMessage")->Insert(msg)->CreatePacket(peer);
 }
+void VariantList::OnDialogRequest(ENetPeer* peer, const std::string& msg, int delay) {
+  PacketVariant pkt(delay);
+  pkt.Insert("OnDialogRequest")->Insert(msg)->CreatePacket(peer);
+}
 void VariantList::SetHasGrowID(ENetPeer* peer, const bool& is_guest, const std::string& tankIDName, const std::string& tankIDPass) {
   PacketVariant pkt;
   pkt.Insert("SetHasGrowID")->Insert((is_guest ? 0 : 1))->Insert(tankIDName)->Insert(tankIDPass)->CreatePacket(peer);
@@ -17,4 +21,8 @@ void VariantList::OnSendToServer(ENetPeer* peer, const int& port, const std::str
 void VariantList::OnRequestWorldSelectMenu(ENetPeer* peer, const std::string& ctx) {
   PacketVariant pkt;
   pkt.Insert("OnRequestWorldSelectMenu")->Insert(ctx)->CreatePacket(peer);
+}
+void VariantList::OnFailedToEnterWorld(ENetPeer* peer) {
+  PacketVariant pkt;
+  pkt.Insert("OnFailedToEnterWorld")->CreatePacket(peer);
 }

@@ -1,0 +1,23 @@
+{
+  "merchant": "example",
+  "servers": [
+    {
+      "display_name": "`2MY SERVER",
+      "name": "MY SERVER",
+      "host": "127.0.0.1",
+      "port": 17091,
+      "expired_at": 0,
+      "options": {
+        "block_3rd_app": false,
+        "disable": false,
+        "hide_server": false,
+        "color": {
+          "red": 255,
+          "green": 255,
+          "blue": 255,
+          "alpha": 255
+        }
+      }
+    }
+  ]
+}

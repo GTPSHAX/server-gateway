@@ -94,6 +94,15 @@ public:
         return this;
     }
 
+    GameDialog* AddLabel(const eDialogElementSizes& size, const std::string& text, const eDialogElementDirections& direction)
+    {
+        // add_label|big|`wBig Text``|left
+        // add_label|small|`wSmall Text``|left
+
+        m_menu.append("add_label|" + GetSizeAsString(size) + "|" + text + "|" + GetDirectionAsString(direction) + "|\n");
+        return this;
+    }
+
     GameDialog* AddTextbox(const std::string& text)
     {
         // add_textbox|text|

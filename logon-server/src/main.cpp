@@ -2,6 +2,7 @@
 
 #include "server/ENetServer.h"
 #include "server/handler/NetMessageGenericText.h"
+#include "server/handler/NetMessageGameMessage.h"
 #include "server/DataManager.h"
 
 #include "utils/ConsoleInterface.h"
@@ -22,6 +23,11 @@ int main(int, char**){
     temp_val = NetMessageGenericTextHandler::init();
   });
   print_info("Loaded {} NetMessageGenericText handler.", temp_val);
+  temp_val = 0;
+  ConsoleInterface::show_loading("Initialize NetMessageGameMessage handler...", [&] {
+    temp_val = NetMessageGameMessageHandler::init();
+  });
+  print_info("Loaded {} NetMessageGameMessage handler.", temp_val);
 
   ENetAddress address;
   std::string ip = "0.0.0.0";
@@ -30,6 +36,9 @@ int main(int, char**){
 
   try {
     ENetServer app(address);
+    app.set_max_incoming_bandwidth(5000);
+    app.set_max_outgoing_bandwidth(5000);
+    app.set_max_peer(500);
     app.service()->join();
   }
   catch (const std::runtime_error& e) {

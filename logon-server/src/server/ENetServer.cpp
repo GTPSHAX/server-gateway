@@ -1,5 +1,9 @@
 #include "ENetServer.h"
 
+#include "handler/NetMessageGameMessage.h"
+
+#include <utils/CacheManager.h>
+
 ENetServer::ENetServer(const ENetAddress& address): m_address(address) {
   std::string host = get_host_ip(&m_address);
 
@@ -52,7 +56,7 @@ std::thread* ENetServer::service() {
         switch (event.type) {
           case ENET_EVENT_TYPE_CONNECT: {
             if (peer->data != NULL) {
-              enet_peer_disconnect_now(peer, 0);
+              Utils::disconnect_peer(peer);
               break;
             }
             print_debug("[{}:{}] Peer with {}:{} connected to server.", sIP, m_address.port, pIP, peer->address.port);
@@ -69,7 +73,7 @@ std::thread* ENetServer::service() {
             
             Curl curl;
             curl.setUrl("http://localhost:8080/check-ip/" + pIP);
-            curl.setTimeout((std::find(allowed_ip_temp.begin(), allowed_ip_temp.end(), peer->address.host) != allowed_ip_temp.end() ? 2 : 5));
+            curl.setTimeout((CacheManager::exists(pIP) ? 2 : 5));
             curl.setSSLVerification(false);
 
             if (curl.perform()) {
@@ -77,7 +81,7 @@ std::thread* ENetServer::service() {
                 nlohmann::json response = nlohmann::json::parse(curl.getResponseData());
                 bool dc = false;
                 if ((response.contains("status") && response["status"] == true) || (response.contains("is_vps") && response["is_vpn"] == true) || (response.contains("is_vps") && response["is_vps"] == true) || (response.contains("is_proxy") && response["is_proxy"] == true)) {
-                  VariantList::OnConsoleMessage(peer, "`o`4Oops``: It appears you're using a `4prohibited third-party application`` or logging in with a `4prohibited address``. If this is a false alert, please contact the `0merchant owner``.");
+                  VariantList::OnConsoleMessage(peer, "`o`4Oops``: It appears you're using a `4prohibited third-party application`` or logging in with a `4prohibited address``. If this is a false alert, please contact the `0merchant owner`` or try login again.");
                   dc = true;
                 }
                 if (response.contains("presentence") && response["presentence"] >= 85) {
@@ -85,7 +89,7 @@ std::thread* ENetServer::service() {
                 }
 
                 if (dc) {
-                  enet_peer_disconnect_later(peer, 0);
+                  Utils::disconnect_peer(peer);
                   break;
                 }
               }
@@ -104,6 +108,10 @@ std::thread* ENetServer::service() {
             switch(packet_type) {
               case NET_MESSAGE_GENERIC_TEXT: {
                 NetMessageGenericTextHandler::execute(peer, &ctx);
+                break;
+              }
+              case NET_MESSAGE_GAME_MESSAGE: {
+                NetMessageGameMessageHandler::execute(peer, &ctx);
                 break;
               }
               default: {
@@ -131,6 +139,7 @@ std::thread* ENetServer::service() {
           }
         }
       }
+      CacheManager::cleanupExpired();
     }
   });
 

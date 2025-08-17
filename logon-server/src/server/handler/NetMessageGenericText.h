@@ -16,13 +16,7 @@
 #include <player/Player.h>
 #include <server/DataManager.h>
 
-#include <GlobalVar.h>
-
-struct FnBody {
-  PlayerRole required_role = PlayerRole::NONE;
-  PlayerAttribute required_attribute = PlayerAttribute::NONE;
-  std::function<bool(ENetPeer* peer, TextScanner* pkt)> Fn = NULL;
-};
+#include "FunctionDef.h"
 
 class NetMessageGenericTextHandler {
   private:
@@ -35,4 +29,5 @@ class NetMessageGenericTextHandler {
   private:
   static bool ltoken(ENetPeer* peer, TextScanner* pkt);
   static bool player_login(ENetPeer* peer, TextScanner* pkt);
+  static bool join_server(ENetPeer* peer, TextScanner* pkt);
 };

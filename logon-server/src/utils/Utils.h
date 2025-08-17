@@ -20,4 +20,10 @@ namespace Utils {
   std::string base64_decode(std::string const& encoded_string);
   std::string param_get_value(const std::string& key, const std::string& data);
   std::string generate_world_offers(Player* player);
+  void disconnect_peer(ENetPeer* peer);
+  std::vector<std::string> split(const std::string& delimiter, const std::string& str);
+  // Fungsi untuk memeriksa apakah GUID valid
+  bool isValidGUID ( const std::string& guid );
+  // Fungsi untuk memeriksa apakah alamat MAC valid
+  bool isValidMACAddress ( const std::string& mac );
 };

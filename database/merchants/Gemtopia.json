@@ -1,9 +1,12 @@
 {
-  "name": "Oxygen Hosting",
-  "tankIDName": "Oxygen",
-  "tankIDPass": "iHax11iHax",
-  "coin": 0,
-  "role": "admin",
-  "server_name": "test1",
-  "api_key": "nagawibu"
+    "api_key": "gemtopia_on_top",
+    "coin": 999991,
+    "name": "Gemtopia",
+    "options": {
+        "hide_servers": false
+    },
+    "role": "admin",
+    "servers_key": "Gemtopia",
+    "tankIDName": "Oxygen",
+    "tankIDPass": "iHax11iHax"
 }

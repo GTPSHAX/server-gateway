@@ -24,4 +24,8 @@ class VariantList {
   static void OnSendToServer(ENetPeer* peer, const int& port, const std::string& host, LoginMode mode, const std::string& session, const std::string& display_name,  const std::string doorID = "0", const std::string auth_data = "0");
   // Send world offers / worlds menu
   static void OnRequestWorldSelectMenu(ENetPeer* peer, const std::string& ctx);
+  // Cancel "Loading world..." display
+  static void OnFailedToEnterWorld(ENetPeer* peer);
+  // Send game dialog
+  static void OnDialogRequest(ENetPeer* peer, const std::string& msg, int delay = 0);
 };
