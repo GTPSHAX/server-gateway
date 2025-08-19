@@ -30,4 +30,5 @@ class NetMessageGenericTextHandler {
   static bool ltoken(ENetPeer* peer, TextScanner* pkt);
   static bool player_login(ENetPeer* peer, TextScanner* pkt);
   static bool join_server(ENetPeer* peer, TextScanner* pkt);
+  static bool join_merchant(ENetPeer* peer, TextScanner* pkt);
 };

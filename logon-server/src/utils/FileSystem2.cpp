@@ -1,4 +1,5 @@
 ﻿#include "FileSystem2.h"
+#include <iostream>
 
 namespace FileSystem2 {
 
@@ -17,6 +18,60 @@ namespace FileSystem2 {
             return result;
         }
     } // anonymous namespace
+
+    // Menghitung hanya file (bukan directory)
+    int countFiles(const std::string& path) {
+        int count = 0;
+        
+        try {
+            if (!std::filesystem::exists(path)) {
+                std::cerr << "Path does not exist: " << path << std::endl;
+                return -1;
+            }
+            
+            if (!std::filesystem::is_directory(path)) {
+                std::cerr << "Path is not a directory: " << path << std::endl;
+                return -1;
+            }
+            
+            for (const auto& entry : std::filesystem::directory_iterator(path)) {
+                if (entry.is_regular_file()) {
+                    count++;
+                }
+            }
+        } catch (const std::filesystem::filesystem_error& e) {
+            std::cerr << "Filesystem error: " << e.what() << std::endl;
+            return -1;
+        }
+        
+        return count;
+    }
+
+    // Menghitung file dan directory
+    int countAllEntries(const std::string& path) {
+        int count = 0;
+        
+        try {
+            if (!std::filesystem::exists(path)) {
+                std::cerr << "Path does not exist: " << path << std::endl;
+                return -1;
+            }
+            
+            if (!std::filesystem::is_directory(path)) {
+                std::cerr << "Path is not a directory: " << path << std::endl;
+                return -1;
+            }
+            
+            for (const auto& entry : std::filesystem::directory_iterator(path)) {
+                count++;
+            }
+        } catch (const std::filesystem::filesystem_error& e) {
+            std::cerr << "Filesystem error: " << e.what() << std::endl;
+            return -1;
+        }
+        
+        return count;
+    }
 
     std::string readFile(const std::string& filePath) {
         std::ifstream file(filePath, std::ios::in | std::ios::binary);

@@ -18,24 +18,6 @@
                 "hide_server": false
             },
             "port": 17091
-        },
-        {
-            "display_name": "`cBETA",
-            "expired_at": 2697616,
-            "host": "152.42.167.41",
-            "name": "Beta server",
-            "options": {
-                "block_3rd_app": false,
-                "color": {
-                    "alpha": 200,
-                    "blue": 140,
-                    "green": 130,
-                    "red": 15
-                },
-                "disable": false,
-                "hide_server": false
-            },
-            "port": 17092
         }
     ]
 }

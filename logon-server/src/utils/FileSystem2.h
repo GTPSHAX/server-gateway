@@ -68,4 +68,6 @@ namespace FileSystem2 {
 	 */
 	void writeEnv(const std::string& filePath, const std::unordered_map<std::string, std::string>& envData, bool append = false);
 
+	int countFiles(const std::string& path);
+	int countAllEntries(const std::string& path);
 }

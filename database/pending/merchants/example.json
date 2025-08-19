@@ -1,0 +1,12 @@
+{
+  "name": "MERCHANT NAME",
+  "tankIDName": "GROWID MERCHANT",
+  "tankIDPass": "PASSWORD MERCHANT",
+  "coin": 0,
+  "role": "merchant",
+  "servers_key": "SERVER KEY",
+  "api_key": "API KEY",
+  "options": {
+    "hide_servers": true
+  }
+}

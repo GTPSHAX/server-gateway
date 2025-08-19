@@ -7,6 +7,7 @@
 #include <enet/enet.h>
 
 #include <player/Player.h>
+#include <SDK/Builders/DialogBuilder.h>
 
 inline const std::string base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                                         "abcdefghijklmnopqrstuvwxyz"
@@ -26,4 +27,13 @@ namespace Utils {
   bool isValidGUID ( const std::string& guid );
   // Fungsi untuk memeriksa apakah alamat MAC valid
   bool isValidMACAddress ( const std::string& mac );
+  std::string format_number(long long int number, bool add_comma = true, int max_digits = 0);
+  void merchant_profile(ENetPeer* peer, nlohmann::json& tData);
+  // Validasi text untuk path safety
+  bool isPathSafeText(const std::string& text);
+  // Bersihkan text dari karakter tidak diizinkan
+  std::string sanitizePathText(const std::string& text);
+  // Deteksi karakter berbahaya untuk path
+  bool containsPathTraversal(const std::string& text);
+  GameDialog DialogJoinMerchant(const std::string& name, const std::string& tankIDName, const std::string& tankIDPass, const std::string& message);
 };

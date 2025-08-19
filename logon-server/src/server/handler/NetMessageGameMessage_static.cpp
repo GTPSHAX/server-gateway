@@ -1,5 +1,8 @@
 #include "NetMessageGameMessage.h"
 
+#include <GlobalVar.h>
+
+#include <utils/SystemUtils.h>
 #include <SDK/Builders/DialogBuilder.h>
 
 std::unordered_map<std::string, FnBody> NetMessageGameMessageHandler::handle = {};
@@ -62,6 +65,8 @@ void NetMessageGameMessageHandler::execute(ENetPeer* peer, TextScanner* pkt) {
 
 bool NetMessageGameMessageHandler::join_request(ENetPeer* peer, TextScanner* pkt) {
   std::string buttonClicked = pkt->GetParmString("name", 1);
+  RoleManager pRole = pClient->get_roles();
+  PlayerCredentials crd = pClient->get_credentials();
 
   // Cancel entering world
   VariantList::OnFailedToEnterWorld(peer);
@@ -72,6 +77,68 @@ bool NetMessageGameMessageHandler::join_request(ENetPeer* peer, TextScanner* pkt
     std::vector<std::string> data = Utils::split("_", buttonClicked);
     pClient->tData["OnRequestWorldSelectMenu"]["page"] = data.size() > 1 ? std::atoi(data[1].c_str()) : 0;
     quit_to_exit(peer, pkt);
+  }
+  else if (buttonClicked == "join_merchant") {
+    if (crd.tankIDName + crd.tankIDPass != "")
+      return 0;
+
+    VariantList::OnDialogRequest(peer, Utils::DialogJoinMerchant("","","","").AddTextbox(std::string(146, ' '))->Build());
+  }
+  else if (buttonClicked == "my_profile" || buttonClicked == "add_new_server") {
+    if (!pRole.is_have_parent_role(PlayerRole::MERCHANT))
+      return 1;
+
+    if (!pClient->tData.contains("merchant") && !pClient->tData.contains("servers"))
+      return 1;
+
+    std::string merchant = pClient->tData["ltoken"]["merchant_name"].get<std::string>();
+
+    if (buttonClicked == "my_profile") {
+      Utils::merchant_profile(peer, pClient->tData);
+
+      goto syncData;
+    }
+
+    return 0;
+
+    syncData:
+      FileSystem2::writeJson(databaseDir + merchant + ".json", pClient->tData["merchant"]);
+      return 0;
+  }
+  else if (buttonClicked == "control_panel") {
+    if (!pRole.is_have_parent_role(PlayerRole::ADMIN))
+      return 1;
+
+    int merchants = FileSystem2::countFiles(databaseDir + "merchants/");
+    int sessions = FileSystem2::countFiles(databaseDir + "sessions/");
+    nlohmann::json transactions = FileSystem2::readJson(databaseDir + "transactions.json");
+    auto mem = SystemUtils::getMemoryUsage();
+    auto cpu = SystemUtils::getCPUUsage();
+    auto ping = SystemUtils::pingHost(DataManager::get_server_config().server_ip);
+
+    GameDialog ctx;
+    ctx.SetDefaultColor('o')
+      ->AddLabel(eDialogElementSizes::BIG, "`wControl Panel", eDialogElementDirections::LEFT)
+      ->AddSmallText("Here you can view all registered merchants and monitor all servers owned by them.")
+      ->AddSpacer(eDialogElementSizes::SMALL)
+      ->AddLabel(eDialogElementSizes::SMALL, "`wGateway statistics:", eDialogElementDirections::LEFT)
+      ->AddSmallText(fmt::format("Merchant registered:\t\t `2{}", Utils::format_number(merchants)))
+      ->AddSmallText(fmt::format("Session saved:\t\t `2{}", Utils::format_number(sessions)))
+      ->AddSmallText(fmt::format("Coin used:\t\t `2{}", Utils::format_number(transactions["coin"]["used"].get<int>())))
+      ->AddSmallText(fmt::format("Coin produced:\t\t `2{}", Utils::format_number(transactions["coin"]["produced"].get<int>())))
+      ->AddSpacer(eDialogElementSizes::SMALL)
+      ->AddLabel(eDialogElementSizes::SMALL, "`wServer statistics:", eDialogElementDirections::LEFT)
+      ->AddSmallText(fmt::format("Memory usage:\t\t `2{}%", mem.usage_percent))
+      ->AddSmallText(fmt::format("Used memory:\t\t `2{} MB", Utils::format_number(mem.used_phys_mem / (1024*1024))))
+      ->AddSmallText(fmt::format("CPU usage:\t\t `2{}%", cpu.usage_percent))
+      ->AddSmallText(fmt::format("Ping:\t\t `2{}", ping.exit_code))
+      ->AddSmallText(fmt::format("Operating system:\t\t `2{}", SystemUtils::getOSName()))
+      ->AddSpacer(eDialogElementSizes::SMALL)
+      ->AddButton("view_merchants", "View merchants")
+      ->AddSpacer(eDialogElementSizes::SMALL)
+      ->EndDialog("control_panel", "Nevermind", "")->AddTextbox(std::string(156, ' '));
+
+    VariantList::OnDialogRequest(peer, ctx.Build());
   }
   else if (buttonClicked._Starts_with("name=")) {
     RoleManager roles = pClient->get_roles();

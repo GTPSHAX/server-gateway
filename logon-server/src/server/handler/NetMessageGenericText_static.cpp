@@ -1,6 +1,8 @@
 #include "NetMessageGenericText.h"
 
 #include <utils/CacheManager.h>
+#include <utils/KeyGenerator.h>
+#include <GlobalVar.h>
 
 std::unordered_map<std::string, FnBody> NetMessageGenericTextHandler::handle = {};
 
@@ -8,6 +10,7 @@ int NetMessageGenericTextHandler::init() {
   handle["ltoken"] = { PlayerRole::NONE, PlayerAttribute::NONE, &ltoken};
   handle["tankIDName"] = { PlayerRole::NONE, PlayerAttribute::NONE, &player_login};
   handle["join_server"] = { PlayerRole::NONE, PlayerAttribute::NONE, &join_server};
+  handle["join_merchant"] = { PlayerRole::NONE, PlayerAttribute::NONE, &join_merchant};
 
   return handle.size();
 }
@@ -62,6 +65,55 @@ void NetMessageGenericTextHandler::execute(ENetPeer* peer, TextScanner* pkt) {
   return;
 }
 
+bool NetMessageGenericTextHandler::join_merchant(ENetPeer* peer, TextScanner* pkt) {
+  PlayerCredentials crd = pClient->get_credentials();
+
+  if (crd.tankIDName + crd.tankIDPass != "")
+    return 1;
+
+  std::string name = pkt->GetParmString("name", 1);
+  std::string tankIDName = pkt->GetParmString("tankIDName", 1);
+  std::string tankIDPass = pkt->GetParmString("tankIDPass", 1);
+  std::string apiKey = KeyGenerator::generateAPIKey();
+  name = Utils::sanitizePathText(name);
+
+  if (std::filesystem::exists(databaseDir + "pending/merchants/" + name + ".json")) {
+    VariantList::OnDialogRequest(peer, Utils::DialogJoinMerchant(name, tankIDName, tankIDPass, "`4Merchant is already in pre-register list!").AddTextbox(std::string(146, ' '))->Build());
+    return 1;
+  }
+  if (std::filesystem::exists(databaseDir + "merchants/" + name + ".json")) {
+    VariantList::OnDialogRequest(peer, Utils::DialogJoinMerchant(name, tankIDName, tankIDPass, "`4Merchant is already registered!").AddTextbox(std::string(146, ' '))->Build());
+    return 1;
+  }
+
+  nlohmann::json data = FileSystem2::readJson(databaseDir + "pending/merchants/example.json");
+  nlohmann::json reg = FileSystem2::readJson(databaseDir + "registered.json");
+  std::vector<std::string> regs = {};
+  
+  if (reg.contains(crd.IPv4))
+    regs = reg[crd.IPv4].get<std::vector<std::string>>();
+  
+  VariantList::OnRequestWorldSelectMenu(peer, Utils::generate_world_offers(pClient));
+
+  if (regs.size() > 2)
+    return 1;
+  
+  regs.emplace_back(name);
+  reg[crd.IPv4] = regs;
+
+  data["name"] = name;
+  data["tankIDName"] = tankIDName;
+  data["tankIDPass"] = tankIDPass;
+  data["servers_key"] = name;
+  data["api_key"] = apiKey;
+  data["coin"] = 1;
+
+  FileSystem2::writeJson(databaseDir + "pending/merchants/" + name + ".json", data);
+  FileSystem2::writeJson(databaseDir + "registered.json", reg);
+  VariantList::OnConsoleMessage(peer, "`2You have successfully registered as a merchant. Please wait up to 48 hours for confirmation from our admin.");
+
+  return 0;
+}
 bool NetMessageGenericTextHandler::join_server(ENetPeer* peer, TextScanner* pkt) {
   RoleManager roles = pClient->get_roles();
   std::string param = pkt->GetParmString("param", 1);
@@ -129,8 +181,17 @@ bool NetMessageGenericTextHandler::join_server(ENetPeer* peer, TextScanner* pkt)
           server["options"]["disable"] = options_disable;
 
           std::string buttonClicked = pkt->GetParmString("buttonClicked", 1);
+          bool refresh = false;
           if (buttonClicked == "apply") {
             pkt->Replace("buttonClicked", "amboyyyy");
+            refresh = true;
+          }
+          if (buttonClicked == "options_delete") {
+            servers.erase(i);
+            refresh = true;
+          }
+          if (refresh) {
+            FileSystem2::writeJson(base_path + "servers/" + mData["servers_key"].get<std::string>() + ".json", sData);
             try {
               std::string ctx = Utils::generate_world_offers(pClient);
               VariantList::OnRequestWorldSelectMenu(peer, ctx);
@@ -139,10 +200,6 @@ bool NetMessageGenericTextHandler::join_server(ENetPeer* peer, TextScanner* pkt)
               VariantList::OnConsoleMessage(peer, fmt::format("`4Error`w: {}", e.what()));
               Utils::disconnect_peer(peer);
             }
-            break;
-          }
-          if (buttonClicked == "options_delete") {
-            servers.erase(i);
             break;
           }
         }

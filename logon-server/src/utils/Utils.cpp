@@ -1,11 +1,140 @@
 #include "Utils.h"
+#include <algorithm>
+#include <cctype>
 
 #include <SDK/Builders/WorldOffersBuilder.h>
 #include "ColorConverter.h"
 #include "FileSystem2.h"
 #include <regex>
+#include <SDK/Builders/DialogBuilder.h>
+#include "VariantList.h"
+#include <GlobalVar.h>
 
+GameDialog Utils::DialogJoinMerchant(const std::string& name, const std::string& tankIDName, const std::string& tankIDPass, const std::string& message) {
+  GameDialog ctx;
+  ctx.SetDefaultColor('o')
+    ->AddLabel(eDialogElementSizes::BIG, "`wJoin merchant", eDialogElementDirections::LEFT)
+    ->AddSmallText("On this page, you can register yourself to become one of our official merchants. By joining as a merchant, you'll gain full control over your servers — including the ability to add new servers, remove existing ones, and manage them directly from your server list. Becoming a merchant also gives you more flexibility and visibility within our platform, making it easier to grow and manage your servers.")
+    ->AddSpacer(eDialogElementSizes::SMALL)
+    ->AddLabel(eDialogElementSizes::SMALL, "`wRegistration form", eDialogElementDirections::LEFT);
 
+  if (message != "")
+    ctx.AddTextbox(message);
+
+  ctx.AddSmallText("To complete your registration, please fill in the fields below correctly.")
+    ->AddTextInput("name", "Merchant name: ", name, 10)
+    ->AddSmallText("This account is only intended for accessing the in-game dashboard.")
+    ->AddTextInput("tankIDName", "GrowID: ", tankIDName, 18)
+    ->AddTextInput("tankIDPass", "Password: ", tankIDPass, 18)
+    ->AddSpacer(eDialogElementSizes::SMALL)
+    ->EndDialog("join_merchant", "Nevermind", "Apply");
+  
+  return ctx;
+}
+bool Utils::isPathSafeText(const std::string& text) {
+  if (text.empty()) {
+    return true;
+  }
+
+  // Cek pola berbahaya
+  if (containsPathTraversal(text)) {
+    return false;
+  }
+
+  // Cek setiap karakter
+  for (char c : text) {
+    // A-Z, a-z, 0-9
+    if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')) {
+      continue;
+    }
+
+    // Karakter simbol yang diizinkan
+    const char allowed[] = { 
+      ' ', '_', '&', '-', '+', '(', ')', '?', '!', ';', ':', '"', '*', 
+      '.', ',', '/', '\\', '=', '[', ']', '{', '}', '<', '>', '@', '#', 
+      '$', '%', '^', '`', '~', '|', '\'' 
+    };
+
+    bool isAllowed = false;
+    for (char allowedChar : allowed) {
+      if (c == allowedChar) {
+        isAllowed = true;
+        break;
+      }
+    }
+
+    if (!isAllowed) {
+      return false;
+    }
+  }
+
+  return true;
+}
+std::string Utils::sanitizePathText(const std::string& text) {
+  std::string result;
+  result.reserve(text.length());
+
+  for (char c : text) {
+    // A-Z, a-z, 0-9
+    if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')) {
+      result += c;
+      continue;
+    }
+
+    // Karakter simbol yang diizinkan
+    const char allowed[] = { 
+      ' ', '_', '&', '-', '+', '(', ')', '?', '!', ';', ':', '"', '*', 
+      '.', ',', '/', '\\', '=', '[', ']', '{', '}', '<', '>', '@', '#', 
+      '$', '%', '^', '`', '~', '|', '\'', ' ' 
+    };
+
+    for (char allowedChar : allowed) {
+      if (c == allowedChar) {
+        result += c;
+        break;
+      }
+    }
+    // Karakter tidak diizinkan diabaikan
+  }
+
+  return result;
+}
+bool Utils::containsPathTraversal(const std::string& text) {
+  // Cek pola berbahaya
+  std::string lowerText = text;
+  std::transform(lowerText.begin(), lowerText.end(), lowerText.begin(), ::tolower);
+
+  // Pola berbahaya umum
+  const std::string dangerous[] = {
+    "../", "..\\", "./", ".\\", 
+    "%2e%2e%2f", "%2e%2e\\", // URL encoded
+    "..%2f", "..%5c",        // Mixed encoding
+    "%c0%ae%c0%ae",          // UTF-8 encoded
+    "..$", "..%",            // Variants
+    "....//", "....\\\\",    // Multiple dots
+    "%00"                    // Null byte
+  };
+
+  for (const std::string& pattern : dangerous) {
+    if (lowerText.find(pattern) != std::string::npos) {
+      return true;
+    }
+
+    // Cek versi uppercase
+    std::string upperPattern = pattern;
+    std::transform(upperPattern.begin(), upperPattern.end(), upperPattern.begin(), ::toupper);
+    if (text.find(upperPattern) != std::string::npos) {
+      return true;
+    }
+  }
+
+  // Cek karakter berbahaya individual
+  if (text.find('\0') != std::string::npos) {  // Null byte
+    return true;
+  }
+
+  return false;
+}
 bool Utils::PeerValidation(ENetPeer* peer) {
   return !(!peer || peer == nullptr || !peer->data || peer->data == NULL || peer->state != ENET_PEER_STATE_CONNECTED);
 }
@@ -32,6 +161,57 @@ std::vector<std::string> Utils::split(const std::string& delimiter, const std::s
 
 	return result;
 }
+std::string Utils::format_number(long long int number, bool add_comma, int max_digits) {
+	std::string result;
+	if (number < 0) {
+		result += '-';
+		number = -number;
+	}
+	if (add_comma) {
+		result += std::to_string(number);
+		int len = result.length();
+		for (int i = len - 3; i > 0; i -= 3) {
+			result.insert(i, ",");
+		}
+	}
+	else {
+		result = std::to_string(number);
+	}
+	if (max_digits > 0 && result.length() > max_digits) {
+		result = result.substr(0, max_digits);
+	}
+	return result;
+}
+void Utils::merchant_profile(ENetPeer* peer, nlohmann::json& tData) {
+  auto& mData = tData["merchant"];
+  auto& sData = tData["servers"];
+  GameDialog ctx;
+  int activeServer = 0;
+
+  for (auto& server : sData["servers"]) {
+    if (server["options"]["disable"].get<bool>())
+      continue;
+    
+    activeServer++;
+  }
+
+  ctx.SetDefaultColor('o')
+  ->AddLabel(eDialogElementSizes::BIG, fmt::format("`w{} Profile", mData["name"].get<std::string>()), eDialogElementDirections::LEFT)
+  ->EmbedData("merchant", mData.dump())
+  ->AddSmallText("This is where you'll see your profile and keep an eye on the stats of all your servers.")
+  ->AddSpacer(eDialogElementSizes::SMALL)
+  ->AddTextbox(fmt::format("Coin: `6{}", Utils::format_number(mData["coin"].get<int>())))
+  ->AddTextbox(fmt::format("Server registered: `2{}", Utils::format_number(mData["coin"].get<int>())))
+  ->AddTextbox(fmt::format("Active servers: `2{}", Utils::format_number(activeServer)))
+  ->AddSpacer(eDialogElementSizes::SMALL)
+  ->AddButton("topup_coin", "Topup coin")
+  ->AddButton("view_servers", "View servers")
+  ->AddButton("settings", "Account settings")
+  ->AddSpacer(eDialogElementSizes::SMALL)
+  ->EndDialog("my_profile", "Nevermind", "")->AddTextbox(std::string(146, ' '));
+
+  VariantList::OnDialogRequest(peer, ctx.Build());
+}
 std::string Utils::generate_world_offers(Player* player) {
   uint32_t default_color = ColorConverter::toBGRA(214,171,94,255);
   std::string merchant = player->tData["ltoken"]["merchant_name"].get<std::string>();
@@ -40,7 +220,6 @@ std::string Utils::generate_world_offers(Player* player) {
   RoleManager pRole = player->get_roles();
   PlayerCredentials pCredentials = player->get_credentials();
   WorldOffersMenu ctx;
-  bool dashboard_showed = false;
   bool hide_servers = false;
   int mCoin = 0;
 
@@ -48,10 +227,10 @@ std::string Utils::generate_world_offers(Player* player) {
   if (!std::filesystem::exists(base_path + "merchants/" + merchant + ".json")) 
     throw std::runtime_error(fmt::format("This merchant ({}) are not affiliated with us!", merchant));
 
-  nlohmann::json mData = FileSystem2::readJson(base_path + "merchants/" + merchant + ".json");
+  player->tData["merchant"] = FileSystem2::readJson(base_path + "merchants/" + merchant + ".json");
+  auto& mData = player->tData["merchant"];
 
   if (pCredentials.tankIDName == mData["tankIDName"].get<std::string>() && pCredentials.tankIDPass == mData["tankIDPass"].get<std::string>()) {
-    dashboard_showed = true;
     mCoin = mData["coin"].get<int>();
 
     // Set role
@@ -81,7 +260,8 @@ std::string Utils::generate_world_offers(Player* player) {
 
   // Fetch servers is exists
   if (std::filesystem::exists(base_path + "servers/" + mData["servers_key"].get<std::string>() + ".json"))  {
-    nlohmann::json sData = FileSystem2::readJson(base_path + "servers/" + mData["servers_key"].get<std::string>() + ".json");
+    player->tData["servers"] = FileSystem2::readJson(base_path + "servers/" + mData["servers_key"].get<std::string>() + ".json");
+    auto& sData = player->tData["servers"];
 
     if (sData.contains("servers") && sData["servers"].is_array()) {
       auto& servers = sData["servers"];
@@ -133,16 +313,25 @@ std::string Utils::generate_world_offers(Player* player) {
   if (additional_msg != "")
     ctx.AddHeading(additional_msg);
 
-  if (pRole.has_role(PlayerRole::ADMIN) || pRole.has_role(PlayerRole::MERCHANT)) {
-    ctx.AddHeading("Dashboard<ROW2>");
-
+  ctx.AddHeading("Dashboard<ROW2>");
+  if (pRole.is_have_parent_role(PlayerRole::MERCHANT)) {
     if (pRole.has_role(PlayerRole::ADMIN))
       ctx.AddButton("Control Panel", "control_panel", 0.5, default_color);
     ctx.AddButton("My Profile", "my_profile", 0.5, default_color)->AddButton("Add new server", "add_new_server", 0.5, default_color);
   }
+  else {
+    nlohmann::json reg = FileSystem2::readJson(databaseDir + "registered.json");
+    std::vector<std::string> regs = {};
+
+    if (reg.contains(pCredentials.IPv4))
+      regs = reg[pCredentials.IPv4].get<std::vector<std::string>>();
+
+    if (regs.size() <= 2)
+      ctx.AddButton("Join merchant", "join_merchant", 0.5, default_color);
+  }
 
   if (pagination.size()) {
-    ctx.AddHeading("Available servers" + std::string(dashboard_showed ? "<CR>" : "<ROW2>"));
+    ctx.AddHeading("Available servers<CR>");
     for (const auto& a : pagination[req_page]) {
       std::string display_name = a.value("display_name", "NONE");
       std::string name = a.value("name", "NONE");
